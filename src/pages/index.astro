@@ -111,10 +111,10 @@ import MobileAppPopup from '../components/popup.astro';
         class="relative z-0 h-screen flex justify-center items-center font-bold">
         <div class="relative z-0">
             <div>
-                <img src="woman.png" alt="Image" class="blur-3xl h-[100vh] w-[100vw] object-cover object-center">
+                <img src="/Opyleo-Landing-Page/woman.png" alt="Image" class="blur-3xl h-[100vh] w-[100vw] object-cover object-center">
             </div>
             <div class="z-10 absolute top-0 left-0">
-                <img src="woman.png" alt="Image" class="h-[100vh] w-[100vw] object-cover object-center">
+                <img src="/Opyleo-Landing-Page/woman.png" alt="Image" class="h-[100vh] w-[100vw] object-cover object-center">
             </div>
         </div>
         <div class="z-10 absolute w-screen overflow-hidden">
@@ -162,10 +162,10 @@ import MobileAppPopup from '../components/popup.astro';
         class="relative z-0 h-screen flex justify-center items-center font-bold">
         <div class="relative z-0">
             <div>
-                <img style="-webkit-transform: scaleX(-1); transform: scaleX(-1);" src="woman.png" alt="Image" class="blur-3xl h-[100vh] w-[100vw] object-cover object-center">
+                <img style="-webkit-transform: scaleX(-1); transform: scaleX(-1);" src="/Opyleo-Landing-Page/woman.png" alt="Image" class="blur-3xl h-[100vh] w-[100vw] object-cover object-center">
             </div>
             <div class="z-10 absolute top-0 left-0">
-                <img style="-webkit-transform: scaleX(-1); transform: scaleX(-1);" src="woman.png" alt="Image" class="h-[100vh] w-[100vw] object-cover object-center">
+                <img style="-webkit-transform: scaleX(-1); transform: scaleX(-1);" src="/Opyleo-Landing-Page/woman.png" alt="Image" class="h-[100vh] w-[100vw] object-cover object-center">
             </div>
         </div>
         <div class="z-10 absolute w-screen overflow-hidden">
@@ -215,7 +215,7 @@ import MobileAppPopup from '../components/popup.astro';
     
         <!-- Image (Below Gradient) -->
         <div class="relative h-full w-full flex justify-center items-end">
-            <img src="section-5.png" 
+            <img src="/Opyleo-Landing-Page/section-5.png" 
                  alt="Ebook Image" 
                  class="h-[70%] w-auto object-cover z-0">
         </div>
@@ -228,4 +228,31 @@ import MobileAppPopup from '../components/popup.astro';
     </footer>
 <!-- <script src="../js/header-of-hero.js"></script> -->
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get all sections
+    const sections = document.querySelectorAll('section');
+    
+    // Calculate and set static heights
+    sections.forEach(section => {
+      // Cast section to HTMLElement
+      const sectionElement = section as HTMLElement;
+      // Get the computed height
+      const height = sectionElement.getBoundingClientRect().height;
+      // Set the height in pixels instead of vh units
+      sectionElement.style.height = `${height}px`;
+      // Remove any vh-based classes
+      sectionElement.classList.remove('h-screen', 'h-[85vh]');
+    });
+
+    // Special handling for elements that might have vh units in inline styles
+    const elementsWithVH = document.querySelectorAll('[style*="vh"]');
+    elementsWithVH.forEach(element => {
+      // Cast element to HTMLElement
+      const htmlElement = element as HTMLElement;
+      const height = htmlElement.getBoundingClientRect().height;
+      htmlElement.style.height = `${height}px`;
+    });
+  });
+</script>
 </html>
