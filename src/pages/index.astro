@@ -9,7 +9,7 @@ import MobileAppPopup from '../components/popup.astro';
 ---
 
 
-<html lang="pl" class="overflow-x-hidden no-scrollbar min-[460px]:overflow-y-hidden">
+<html lang="""pl" class="overflow-x-hidden no-scrollbar min-[460px]:overflow-y-hidden">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,7 +84,7 @@ import MobileAppPopup from '../components/popup.astro';
             <span>Ponad <b class="font-black">10 tysięcy</b> pobrań</span>
         </div> -->
         <div class="flex items-center justify-center header-of-hero">
-            <span>Witaj w <b class="font-black">Opyleo</b></span>
+            <span id="test-id">Witaj w <b class="font-black">Opyleo</b></span>
         </div>
         
         <Swiper />
@@ -232,7 +232,7 @@ import MobileAppPopup from '../components/popup.astro';
     // Check if svh/lvh is supported
     if (!CSS.supports('height', '100svh')) {
       // Get initial viewport height before any browser UI changes
-      const maxViewportHeight = Math.max(
+      let maxViewportHeight = Math.max(
         window.innerHeight,
         document.documentElement.clientHeight,
         window.visualViewport?.height || 0
@@ -243,37 +243,54 @@ import MobileAppPopup from '../components/popup.astro';
       const footer = document.querySelector('footer');
       
       function setHeights() {
-        // Set hero section to current viewport height
-        if (sections[0]) {
-          const heroElement = sections[0] as HTMLElement;
-          heroElement.style.height = `${window.innerHeight}px`;
-        }
+        // Update maxViewportHeight if it's larger than current value
+        const currentHeight = Math.max(
+          window.innerHeight,
+          document.documentElement.clientHeight,
+          window.visualViewport?.height || 0
+        );
+        maxViewportHeight = Math.max(maxViewportHeight, currentHeight);
 
-        // Set other sections to max viewport height
+        // Set initial heights
         sections.forEach((section, index) => {
-          if (index === 0) return; // Skip hero section
           const sectionElement = section as HTMLElement;
-          // Use 85% of maxViewportHeight for regular sections
-          sectionElement.style.height = `${maxViewportHeight * 0.85}px`;
+          if (index === 0) {
+            // Hero section - use current viewport height
+            sectionElement.style.height = `${window.innerHeight}px`;
+          } else {
+            // Other sections - use maxViewportHeight
+            sectionElement.style.height = `${maxViewportHeight * 0.85}px`;
+            // Remove any vh-based classes that might interfere
+            sectionElement.classList.remove('h-[85vh]', 'h-[85lvh]', 'h-[85svh]');
+          }
         });
 
-        // Set footer height using maxViewportHeight
         if (footer) {
           const footerElement = footer as HTMLElement;
           footerElement.style.height = `${maxViewportHeight * 0.15}px`;
+          footerElement.classList.remove('h-[15vh]', 'h-[15lvh]', 'h-[15svh]');
         }
       }
 
       // Initial setup
       setHeights();
 
-      // Update only hero section height on resize/orientation change
-      // since other sections should maintain maxViewportHeight
+      // Add a small delay to ensure we capture the true max height
+      setTimeout(setHeights, 100);
+
+      // Handle orientation changes and resizes
       window.addEventListener('resize', () => {
+        // Only update hero section on regular resize
         if (sections[0]) {
           const heroElement = sections[0] as HTMLElement;
           heroElement.style.height = `${window.innerHeight}px`;
         }
+      });
+
+      // Handle orientation changes specifically
+      window.addEventListener('orientationchange', () => {
+        // Wait for the orientation change to complete
+        setTimeout(setHeights, 100);
       });
     }
   });
