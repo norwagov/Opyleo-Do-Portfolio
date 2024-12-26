@@ -23,32 +23,6 @@ import MobileAppPopup from '../components/popup.astro';
   * {
     //border: 2px solid red;
   }
-  section {
-    /* Fallback for browsers that don't support svh */
-    height: 85vh;
-    /* Modern browsers */
-    @supports (height: 100svh) {
-      height: 85svh;
-    }
-  }
-
-  .h-screen {
-    /* Fallback */
-    height: 100vh;
-    /* Modern browsers */
-    @supports (height: 100svh) {
-      height: 100svh;
-    }
-  }
-
-  footer {
-    /* Fallback */
-    height: 15vh;
-    /* Modern browsers */
-    @supports (height: 100svh) {
-      height: 15svh;
-    }
-  }
 </style>
 </head>
 <body class="no-scrollbar overflow-x-hidden min-[460px]:overflow-y-hidden">
@@ -257,37 +231,50 @@ import MobileAppPopup from '../components/popup.astro';
   document.addEventListener('DOMContentLoaded', function() {
     // Check if svh/lvh is supported
     if (!CSS.supports('height', '100svh')) {
-      // Get all elements with vh units
+      // Get initial viewport height before any browser UI changes
+      const maxViewportHeight = Math.max(
+        window.innerHeight,
+        document.documentElement.clientHeight,
+        window.visualViewport?.height || 0
+      );
+
+      // Get all sections and footer
       const sections = document.querySelectorAll('section');
       const footer = document.querySelector('footer');
       
       function setHeights() {
-        const viewportHeight = window.innerHeight;
-        
-        sections.forEach(section => {
+        // Set hero section to current viewport height
+        if (sections[0]) {
+          const heroElement = sections[0] as HTMLElement;
+          heroElement.style.height = `${window.innerHeight}px`;
+        }
+
+        // Set other sections to max viewport height
+        sections.forEach((section, index) => {
+          if (index === 0) return; // Skip hero section
           const sectionElement = section as HTMLElement;
-          // Convert 85vh to pixels
-          if (sectionElement.classList.contains('h-[85vh]')) {
-            sectionElement.style.height = `${viewportHeight * 0.85}px`;
-          }
-          // Convert 100vh to pixels
-          if (sectionElement.classList.contains('h-[100vh]')) {
-            sectionElement.style.height = `${viewportHeight}px`;
-          }
+          // Use 85% of maxViewportHeight for regular sections
+          sectionElement.style.height = `${maxViewportHeight * 0.85}px`;
         });
 
-        // Handle footer (15vh)
+        // Set footer height using maxViewportHeight
         if (footer) {
-          footer.style.height = `${viewportHeight * 0.15}px`;
+          const footerElement = footer as HTMLElement;
+          footerElement.style.height = `${maxViewportHeight * 0.15}px`;
         }
       }
 
-      // Set heights initially
+      // Initial setup
       setHeights();
 
-      // Update heights when viewport resizes or orientation changes
-      window.addEventListener('resize', setHeights);
-      window.addEventListener('orientationchange', setHeights);
+      // Update only hero section height on resize/orientation change
+      // since other sections should maintain maxViewportHeight
+      window.addEventListener('resize', () => {
+        if (sections[0]) {
+          const heroElement = sections[0] as HTMLElement;
+          heroElement.style.height = `${window.innerHeight}px`;
+        }
+      });
     }
   });
 </script>
