@@ -20,7 +20,7 @@
   .no-scrollbar {
       -ms-overflow-style: none; 
       scrollbar-width: 0;
-}
+  }
 }
 
 @layer base {
