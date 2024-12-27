@@ -8,7 +8,7 @@ interface Props {
     price?: string;
     state?: string;
     seller?: string;
-    imagePath?: string;
+    defaultImagePath?: string;
     imageUrl?: string;
 }
 
@@ -16,18 +16,13 @@ const {
     title = "Tytuł", 
     price = "Cena", 
     state = "Stan", 
-    seller = "Imię Nazwisko", 
-    imagePath = "book-of-black-cover-closed-svgrepo-com.svg",
-    imageUrl
+    seller = "Imię Nazwisko",
+    defaultImagePath = "/src/assets/default-image.jpg",
+    imageUrl = ""
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}', { eager: true });
+// const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}', { eager: true });
 
-// Only check for local image if no URL is provided
-const useLocalImage = !imageUrl;
-if (useLocalImage && !images[imagePath]) {
-    throw new Error(`"${imagePath}" does not exist"`);
-}
 
 function truncateTitle(
     title: string, 
@@ -52,7 +47,11 @@ function truncateTitle(
 
     return truncated;
 }
-
+// Only check for local image if no URL i   s provided
+// const useLocalImage = !imageUrl;
+// if (useLocalImage && !images[defaultImagePath]) {
+//     throw new Error(`"${defaultImagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`);
+// }
 // Initial limits
 const maxWords = 10;
 const maxCharacters = 30;
@@ -90,21 +89,11 @@ const shortTitle = truncateTitle(
         <div class="w-full h-full rounded-t-xl overflow-hidden">
             <!-- Book cover/content area -->
             <div class="w-full h-full relative">
-                {useLocalImage ? (
-                    <Image 
-                        src={images[imagePath].default}
-                        alt={title}
-                        class="w-full h-full object-cover"
-                        draggable="false"
-                    />
-                ) : (
-                    <img 
-                        src={imageUrl}
-                        alt={title}
-                        class="w-full h-full object-cover"
-                        draggable="false"
-                    />
-                )}
+                <img draggable="false"
+                    class="w-full h-full object-cover"
+                    src={imageUrl}
+                    alt={title}
+                    onerror=`this.onerror=null; this.src='${defaultImagePath}';`>
             </div>
         </div>
         <!-- Camera Icon Button -->
