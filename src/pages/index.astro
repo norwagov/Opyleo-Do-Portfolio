@@ -6,11 +6,15 @@ import '../css/animations.css';
 import CardTemplate from '../components/cardTemplate.astro'
 import Swiper from '../components/swiperComponent.astro'
 import MobileAppPopup from '../components/popup.astro';
+import GoogleAnalyticsTagHead from '../components/googleAnalyticsHead.astro';
+import GoogleAnalyticsTagBody from '../components/googleAnalyticsBody.astro';
+import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
 ---
 
 
 <html lang="pl" class="overflow-x-hidden no-scrollbar min-[460px]:overflow-y-hidden">
     <head>
+        <GoogleAnalyticsHead />
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +59,7 @@ import MobileAppPopup from '../components/popup.astro';
         </style>
     </head>
     <body class="no-scrollbar overflow-x-hidden min-[460px]:overflow-y-hidden">
+        <GoogleAnalyticsTagBody />
         <div class="min-[460px]:flex hidden absolute inset-0 items-center justify-center bg-[#ED9CA1] z-10">
             <div class="flex flex-col min-[1200px]:items-end max-[1200px]:items-center min-[1200px]:flex-row w-full justify-center gap-6">
                 <div class="flex justify-center w-[20rem] max-md:w-[15rem]">
