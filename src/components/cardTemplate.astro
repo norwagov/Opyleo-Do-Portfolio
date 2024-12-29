@@ -8,7 +8,7 @@ interface Props {
     price?: string;
     state?: string;
     seller?: string;
-    imagePath?: string;
+    defaultImagePath?: string;
     imageUrl?: string;
 }
 
@@ -16,18 +16,13 @@ const {
     title = "Tytuł", 
     price = "Cena", 
     state = "Stan", 
-    seller = "Imię Nazwisko", 
-    imagePath = "book-of-black-cover-closed-svgrepo-com.svg",
-    imageUrl
+    seller = "Imię Nazwisko",
+    defaultImagePath = "default-image.jpg",
+    imageUrl = ""
 } = Astro.props;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}', { eager: true });
+// const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}', { eager: true });
 
-// Only check for local image if no URL is provided
-const useLocalImage = !imageUrl;
-if (useLocalImage && !images[imagePath]) {
-    throw new Error(`"${imagePath}" does not exist"`);
-}
 
 function truncateTitle(
     title: string, 
@@ -52,10 +47,14 @@ function truncateTitle(
 
     return truncated;
 }
-
+// Only check for local image if no URL i   s provided
+// const useLocalImage = !imageUrl;
+// if (useLocalImage && !images[defaultImagePath]) {
+//     throw new Error(`"${defaultImagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`);
+// }
 // Initial limits
 const maxWords = 10;
-const maxCharacters = 30;
+const maxCharacters = 29;
 
 
 // Use the function with both sets of limits
@@ -69,43 +68,50 @@ const shortTitle = truncateTitle(
     .aspect-responsive {
         @apply aspect-[7/12];
     }
+
+    /* Medium viewport */
+    @media (min-height: 801px) and (max-height: 900px) {
+        .aspect-responsive {
+            aspect-ratio: 25/36;
+        }
+        .compact-on-medium {
+            @apply text-xs;
+        }
+        .state-hidden {
+            @apply hidden;
+        }
+    }
+
+    /* Small viewport - adjusted rules */
     @media (max-height: 800px) {
         .aspect-responsive {
-            aspect-ratio: 25 / 36;
+            aspect-ratio: 25/34; /* Slightly shorter ratio for small viewports */
         }
-        .title-responsive {
-            @apply !text-xs;
+        .details-container {
+            @apply py-2; /* Reduced padding */
+        }
+        /* .title-responsive {
+            @apply !text-sm;
         }
         .price-responsive {
-            @apply !text-xs;
+            @apply !text-sm mt-1;
+        } */
+        .hide-on-small {
+            @apply hidden;
+        }
+        .description-small {
+            @apply h-full justify-around
         }
     }
 </style>
-<div class="w-full max-w-18 bg-white rounded-xl transition-shadow 
-            aspect-responsive">
-    <!-- Image Container -->
-    <div class="relative w-full 
-                h-2/3">
-        <!-- Main Image Area -->
+<div class="w-full max-w-18 bg-white rounded-xl transition-shadow aspect-responsive">
+    <div class="relative w-full h-2/3"> {/* Maintain proportional height */}
         <div class="w-full h-full rounded-t-xl overflow-hidden">
-            <!-- Book cover/content area -->
-            <div class="w-full h-full relative">
-                {useLocalImage ? (
-                    <Image 
-                        src={images[imagePath].default}
-                        alt={title}
-                        class="w-full h-full object-cover"
-                        draggable="false"
-                    />
-                ) : (
-                    <img 
-                        src={imageUrl}
-                        alt={title}
-                        class="w-full h-full object-cover"
-                        draggable="false"
-                    />
-                )}
-            </div>
+            <img draggable="false"
+                class="w-full h-full object-cover"
+                src={imageUrl}
+                alt={title}
+                onerror=`this.onerror=null; this.src='${defaultImagePath}';`>
         </div>
         <!-- Camera Icon Button -->
         <button class="absolute top-3 right-3 bg-black/40 hover:bg-black/60 rounded-full p-2.5 transition-colors">
@@ -116,20 +122,27 @@ const shortTitle = truncateTitle(
         </button>
     </div>
 
-    <!-- Product Details -->
-    <div class="p-4 flex justify-between flex-col h-1/3">
-        <!-- Top info -->
-        <div>
-            <h2 class="text-base max-[370px]:text-sm md:text-lg lg:text-xl font-medium mb-1 title-responsive">{shortTitle}</h2>
-            <p class="text-gray-600 max-[370px]:text-sm text-sm mb-2 hidden min-[420px]:block">{state}</p>
-            <p class="text-lg md:text-xl max-[370px]:text-base lg:text-2xl font-bold mb-3 price-responsive">{price}</p>
+    <!-- Product Details - Modified for better space usage -->
+    <div class="p-4 flex flex-col justify-start h-1/3 details-container">
+        <div class="flex flex-col gap-1 description-small">
+            <h2 class="text-base max-[370px]:text-sm md:text-lg lg:text-xl font-medium title-responsive">
+                {shortTitle}
+            </h2>
+            <p class="text-lg md:text-xl max-[370px]:text-base lg:text-2xl font-bold price-responsive">
+                {price}
+            </p>
+            <!-- State info with conditional visibility -->
+            <p class="text-gray-600 max-[370px]:text-sm text-sm hide-on-small state-hidden">
+                {state}
+            </p>
         </div>
-        <!-- Bottom Row -->
-        <div class="flex items-center justify-between">
+        
+        <!-- Bottom Row with conditional visibility -->
+        <div class="flex items-center justify-between mt-auto hide-on-small">
             <!-- User Info -->
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 compact-on-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 <span class="text-xs md:text-sm text-gray-600">{seller}</span>
             </div>
