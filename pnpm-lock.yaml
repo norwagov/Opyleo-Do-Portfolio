@@ -26,6 +26,10 @@ importers:
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
+    devDependencies:
+      '@types/google.analytics':
+        specifier: ^0.0.46
+        version: 0.0.46
 
 packages:
 
@@ -606,6 +610,9 @@ packages:
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+
+  '@types/google.analytics@0.0.46':
+    resolution: {integrity: sha512-wuMJ3GqLFGsTZdJ315b+uNnH2AwFScyS67NHlKOD4RaPMFt/N0vxdh6fvDgvOFg62a11Fqn2ggJwUypFmIko+A==}
 
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
@@ -2654,6 +2661,8 @@ snapshots:
       '@types/ms': 0.7.34
 
   '@types/estree@1.0.6': {}
+
+  '@types/google.analytics@0.0.46': {}
 
   '@types/hast@3.0.4':
     dependencies:

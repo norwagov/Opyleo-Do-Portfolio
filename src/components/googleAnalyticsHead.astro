@@ -1,13 +1,13 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWSD7YTB5C"></script>
 <script is:inline>
-  // Define gtag as a global function
+  // @ts-ignore - gtag is added by the script above
   window.dataLayer = window.dataLayer || [];
   function gtag() {
-    window.dataLayer.push(arguments);
+    dataLayer.push(arguments);
   }
   gtag('js', new Date());
-
+  
   gtag('config', 'G-NWSD7YTB5C', {
     'cookie_domain': 'auto'
   });
