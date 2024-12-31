@@ -176,14 +176,14 @@ const {
 
     if (googlePlayLink) {
         googlePlayLink.addEventListener('click', () => {
-            gtag('event', 'app_store_click', {
+            gtag('event', 'google_play_click', {
                 'event_category': 'conversion',
                 'event_label': 'Google Play',
                 'outbound': true
             });
         });
     }
-    
+
     function closePopup() {
       body = document.querySelector('body');
       body.classList.remove('overflow-y-hidden');
