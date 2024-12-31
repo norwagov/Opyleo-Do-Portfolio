@@ -144,6 +144,11 @@ const {
     if (!popup || !closeButton || !popupContent || triggerElements.length === 0) return;
 
     function openPopup() {
+      // Track popup open
+      gtag('event', 'popup_open', {
+            'event_category': 'engagement',
+            'event_label': triggerSelector // Identifies which button triggered the popup
+        });
       body = document.querySelector('body');
       body.classList.add('overflow-y-hidden');
       popup.classList.remove('hidden');
@@ -155,7 +160,26 @@ const {
       popupContent.classList.remove('scale-90');
       popupContent.classList.remove('opacity-0');
     }
+    // Track app store clicks
+    if (appStoreLink) {
+        appStoreLink.addEventListener('click', () => {
+            gtag('event', 'app_store_click', {
+                'event_category': 'conversion',
+                'event_label': 'App Store',
+                'outbound': true
+            });
+        });
+    }
 
+    if (googlePlayLink) {
+        googlePlayLink.addEventListener('click', () => {
+            gtag('event', 'app_store_click', {
+                'event_category': 'conversion',
+                'event_label': 'Google Play',
+                'outbound': true
+            });
+        });
+    }
     function closePopup() {
       body = document.querySelector('body');
       body.classList.remove('overflow-y-hidden');
