@@ -1,22 +1,14 @@
-<!-- Google Tag Manager -->
-<script type="text/javascript">
-  (function(w, d, s, l, i) {
-    w[l] = w[l] || [];
-    w[l].push({
-      'gtm.start': new Date().getTime(),
-      event: 'gtm.js'
-    });
-
-    const f = d.getElementsByTagName(s)[0];
-    const j = d.createElement(s);
-    const dl = l !== 'dataLayer' ? '&l=' + l : '';
-
-    j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-    
-    if (f.parentNode) {
-      f.parentNode.insertBefore(j, f);
-    }
-  })(window, document, 'script', 'dataLayer', 'GTM-559LMJ86');
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NWSD7YTB5C"></script>
+<script is:inline>
+  // @ts-ignore - gtag is added by the script above
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  
+  gtag('config', 'G-NWSD7YTB5C', {
+    'cookie_domain': 'auto'
+  });
 </script>
-<!-- End Google Tag Manager -->
