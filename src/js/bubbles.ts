@@ -12,6 +12,9 @@ interface BubbleNode {
     vy: number;
     radius: number;
     genre: Genre;
+    isDragging: boolean;
+    dragStartX: number;
+    dragStartY: number;
 }
 
 export class BubbleLayout {
@@ -22,6 +25,8 @@ export class BubbleLayout {
     private centerX: number;
     private centerY: number;
     private isRunning: boolean = false;
+    private responsivenessCoefficient: number;
+    private draggedNode: BubbleNode | null = null;
 
     constructor(containerId: string, private genres: Genre[]) {
         const containerElement = document.getElementById(containerId);
@@ -36,6 +41,16 @@ export class BubbleLayout {
         this.height = rect.height;
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
+        
+        // Define the responsiveness coefficient
+        if (this.width < 500) {
+            this.responsivenessCoefficient = 0.80;
+        } else if (this.width < 1000) {
+            this.responsivenessCoefficient = 0.90;
+        }
+        else {
+            this.responsivenessCoefficient = 1;
+        }
 
         this.initialize();
         this.setupResizeListener();
@@ -53,12 +68,17 @@ export class BubbleLayout {
         const text = document.createElement('div');
         text.className = 'genre-bubble-text';
         text.textContent = genre.name;
-        text.style.fontSize = `${genre.popularity * 1.5}rem`;
+        text.style.fontSize = `${genre.popularity * 1.5 * this.responsivenessCoefficient}rem`;
         
         
         bubble.appendChild(text);
         this.container.appendChild(bubble);
-
+        
+        // Add touch events for mobile
+        bubble.addEventListener('touchstart', (e) => this.handleTouchStart(e, index));
+        bubble.addEventListener('touchmove', (e) => this.handleTouchMove(e));
+        bubble.addEventListener('touchend', () => this.handleTouchEnd());
+        
         // Initial random position near center
         return {
             element: bubble,
@@ -67,14 +87,56 @@ export class BubbleLayout {
             y: this.centerY + (Math.random() - 0.5) * 100,
             vx: 0,
             vy: 0,
-            radius: genre.popularity * 80,
-            genre
+            radius: genre.popularity * 80 * this.responsivenessCoefficient,
+            genre,
+            isDragging: false,
+            dragStartX: 0,
+            dragStartY: 0
         };
         });
 
         this.isRunning = true;
         this.animate();
         this.updateSizes();
+    }
+
+    private handleTouchStart(e: TouchEvent, index: number) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        this.draggedNode = this.nodes[index];
+        this.draggedNode.isDragging = true;
+        this.draggedNode.dragStartX = touch.clientX - this.draggedNode.x;
+        this.draggedNode.dragStartY = touch.clientY - this.draggedNode.y;
+        
+        // Stop any current movement
+        this.draggedNode.vx = 0;
+        this.draggedNode.vy = 0;
+    }
+
+    private handleTouchMove(e: TouchEvent) {
+        e.preventDefault();
+        if (!this.draggedNode) return;
+
+        const touch = e.touches[0];
+        this.draggedNode.x = touch.clientX - this.draggedNode.dragStartX;
+        this.draggedNode.y = touch.clientY - this.draggedNode.dragStartY;
+
+        // Keep bubble within bounds
+        this.draggedNode.x = Math.max(
+            this.draggedNode.radius,
+            Math.min(this.width - this.draggedNode.radius, this.draggedNode.x)
+        );
+        this.draggedNode.y = Math.max(
+            this.draggedNode.radius,
+            Math.min(this.height - this.draggedNode.radius, this.draggedNode.y)
+        );
+    }
+
+    private handleTouchEnd() {
+        if (this.draggedNode) {
+            this.draggedNode.isDragging = false;
+            this.draggedNode = null;
+        }
     }
 
     private setupResizeListener(): void {
@@ -106,50 +168,50 @@ export class BubbleLayout {
     private animate(): void {
         if (!this.isRunning) return;
 
-        // Apply forces
         this.nodes.forEach(node => {
-        // Gravity towards center
-        const dx = this.centerX - node.x;
-        const dy = this.centerY - node.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance > 0) {
-            node.vx += (dx / distance) * 0.5;
-            node.vy += (dy / distance) * 0.5;
-        }
-
-        // Collision avoidance
-        this.nodes.forEach(other => {
-            if (node === other) return;
-            
-            const dx = other.x - node.x;
-            const dy = other.y - node.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            const minDistance = (node.radius + other.radius) * 1.2;
-
-            if (distance < minDistance && distance > 0) {
-            const angle = Math.atan2(dy, dx);
-            const force = (minDistance - distance) * 0.05;
-            
-            node.vx -= Math.cos(angle) * force;
-            node.vy -= Math.sin(angle) * force;
+            if (node.isDragging) {
+                node.element.style.transform = `translate(${node.x - node.radius}px, ${node.y - node.radius}px)`;
+                return;
             }
-        });
 
-        // Apply velocity with damping
-        node.vx *= 0.95;
-        node.vy *= 0.95;
-        
-        // Update position
-        node.x += node.vx;
-        node.y += node.vy;
+            // Reduce gravity force (from 0.5 to 0.2)
+            const dx = this.centerX - node.x;
+            const dy = this.centerY - node.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance > 0) {
+                node.vx += (dx / distance) * 0.2;  // Reduced from 0.5
+                node.vy += (dy / distance) * 0.2;  // Reduced from 0.5
+            }
 
-        // Constrain to bounds
-        node.x = Math.max(node.radius, Math.min(this.width - node.radius, node.x));
-        node.y = Math.max(node.radius, Math.min(this.height - node.radius, node.y));
+            // Reduce collision force (from 0.05 to 0.02)
+            this.nodes.forEach(other => {
+                if (node === other) return;
+                
+                const dx = other.x - node.x;
+                const dy = other.y - node.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const minDistance = (node.radius + other.radius) * 1.2;
 
-        // Update element position
-        node.element.style.transform = `translate(${node.x - node.radius}px, ${node.y - node.radius}px)`;
+                if (distance < minDistance && distance > 0) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (minDistance - distance) * 0.02;  // Reduced from 0.05
+                    
+                    node.vx -= Math.cos(angle) * force;
+                    node.vy -= Math.sin(angle) * force;
+                }
+            });
+
+            // Increase damping (from 0.95 to 0.98)
+            node.vx *= 0.98;  // Increased from 0.95
+            node.vy *= 0.98;  // Increased from 0.95
+            
+            node.x += node.vx;
+            node.y += node.vy;
+
+            // Add smooth transition to the element's transform
+            node.element.style.transition = 'transform 0.1s ease-out';
+            node.element.style.transform = `translate(${node.x - node.radius}px, ${node.y - node.radius}px)`;
         });
 
         requestAnimationFrame(() => this.animate());

@@ -157,7 +157,7 @@ const {
         popupContent.classList.remove('opacity-0');
 
         // Track popup open after it's actually opened
-        gtag('event', 'popup_open', {
+        gtag('event', 'Opened Popup', {
             'event_category': 'engagement',
             'event_label': triggerSelector
         });
@@ -166,7 +166,7 @@ const {
     // Track app store clicks
     if (appStoreLink) {
         appStoreLink.addEventListener('click', () => {
-            gtag('event', 'app_store_click', {
+            gtag('event', 'AppStoreClick', {
                 'event_category': 'conversion',
                 'event_label': 'App Store',
                 'outbound': true
@@ -175,13 +175,21 @@ const {
     }
 
     if (googlePlayLink) {
+        console.log('Google Play link found:', googlePlayLink);
         googlePlayLink.addEventListener('click', () => {
-            gtag('event', 'google_play_click', {
+            console.log('Google Play link clicked');
+            gtag('event', 'GooglePlayClick', {  // Changed to match your original naming
                 'event_category': 'conversion',
                 'event_label': 'Google Play',
                 'outbound': true
             });
+            // Add small delay to ensure event fires
+            setTimeout(() => {
+                window.open(googlePlayLink.href, '_blank');
+            }, 100);
         });
+    } else {
+        console.error('Google Play link not found');
     }
 
     function closePopup() {

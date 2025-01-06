@@ -190,7 +190,8 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 <p class="autoShow text-4xl font-bold mb-4">Opyleo</p>
                 <p class="autoShow text-xl font-normal">Odkryj nasze kategorie i sprawdź, która najbardziej Ci się podoba!</p>
             </div>
-            <div id="bubbles-container" class="relative flex-grow w-4/5 h-4/5"></div>
+            <div id="bubbles-container" class="relative flex-grow w-4/5"></div>
+            <div class="h-[10%] w-full"></div>
         </section>
         <script>
             import { BubbleLayout, type Genre } from '../js/bubbles';
@@ -220,7 +221,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
             });
           </script>
           
-          <style>            
+          <style>
             :global(.genre-bubble) {
               position: absolute;
               border-radius: 50%;
