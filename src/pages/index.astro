@@ -190,20 +190,21 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 <p class="autoShow text-4xl font-bold mb-4">Opyleo</p>
                 <p class="autoShow text-xl font-normal">Odkryj nasze kategorie i sprawdź, która najbardziej Ci się podoba!</p>
             </div>
-            <div id="bubbles-container" class="relative flex-grow w-full"></div>
+            <div id="bubbles-container" class="relative flex-grow w-4/5 h-4/5"></div>
         </section>
         <script>
             import { BubbleLayout, type Genre } from '../js/bubbles';
             
             document.addEventListener('DOMContentLoaded', function() {
               const genres: Genre[] = [
-                { name: 'Horror', popularity: 0.8 },
-                { name: 'Romans', popularity: 1.0 },
+                { name: 'Horrory', popularity: 0.8 },
+                { name: 'Romansy', popularity: 1.0 },
                 { name: 'Fantastyka', popularity: 0.9 },
-                { name: 'Kryminał', popularity: 1.0 },
-                { name: 'Biografia', popularity: 0.7 },
+                { name: 'Kryminały', popularity: 1.0 },
                 { name: 'Przygodowe', popularity: 0.85 },
-                { name: 'Podreczniki', popularity: 0.5 }
+                { name: 'Podręczniki', popularity: 0.8 },
+                { name: 'Zbiory zadań', popularity: 0.7},
+                { name: 'Psychologia', popularity: 0.65}
               ];
               
               try {
@@ -219,13 +220,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
             });
           </script>
           
-          <style>
-            #bubbles-container {
-              position: relative;
-              width: 100%;
-              height: 100%;
-            }
-            
+          <style>            
             :global(.genre-bubble) {
               position: absolute;
               border-radius: 50%;

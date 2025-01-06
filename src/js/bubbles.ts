@@ -30,6 +30,8 @@ export class BubbleLayout {
         
         // Initialize dimensions
         const rect = this.container.getBoundingClientRect();
+        console.log("Width of the container: ", rect.width);
+        console.log("Height of the container: ", rect.height);
         this.width = rect.width;
         this.height = rect.height;
         this.centerX = this.width / 2;
@@ -52,7 +54,6 @@ export class BubbleLayout {
         text.className = 'genre-bubble-text';
         text.textContent = genre.name;
         text.style.fontSize = `${genre.popularity * 1.5}rem`;
-        console.log(text);
         
         
         bubble.appendChild(text);
