@@ -142,10 +142,13 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                         <span class="sr-only">Scroll down by 20%</span>
                     </button>
                     <script>
-                        document.getElementById('scroll-button').addEventListener('click', () => {
-                            const scrollAmount = window.innerHeight * 0.1; // Calculate 20% of the viewport height
-                            window.scrollBy({ top: scrollAmount, behavior: 'smooth' }); // Scroll down smoothly
-                        });
+                        const scrollButton = document.getElementById('scroll-button');
+                        if (scrollButton) {
+                            scrollButton.addEventListener('click', () => {
+                                const scrollAmount = window.innerHeight * 0.1; // Calculate 20% of the viewport height
+                                window.scrollBy({ top: scrollAmount, behavior: 'smooth' }); // Scroll down smoothly
+                            });
+                        }
                     </script>
 
                 </div>
