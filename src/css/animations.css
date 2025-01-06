@@ -10,7 +10,6 @@
 .scroll-wrapper {
   height: 1.5em;
   overflow: hidden;
-  border: red solid 1px;
   text-align: center;
   width: 100%;
 }

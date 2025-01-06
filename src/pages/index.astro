@@ -133,7 +133,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                     </div>
                     <button
                             type="button"
-                            class="mr-5 ml-2 text-white bg-highlight-1 hover:bg-highlight-2 focus:ring-4 focus:outline-none focus:ring-highlight-1-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center rotate-90"
+                            class="mr-5 ml-2 text-white bg-highlight-1 hover:bg-highlight-2 focus:outline-none focus:ring-highlight-1-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center rotate-90"
                             id="scroll-button"
                     >
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -145,7 +145,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                         const scrollButton = document.getElementById('scroll-button');
                         if (scrollButton) {
                             scrollButton.addEventListener('click', () => {
-                                const scrollAmount = window.innerHeight * 0.1; // Calculate 20% of the viewport height
+                                const scrollAmount = window.innerHeight; // Calculate 20% of the viewport height
                                 window.scrollBy({ top: scrollAmount, behavior: 'smooth' }); // Scroll down smoothly
                             });
                         }
