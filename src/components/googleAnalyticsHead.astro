@@ -1,7 +1,6 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWSD7YTB5C"></script>
 <script is:inline>
-  // @ts-ignore - gtag is added by the script above
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
@@ -9,6 +8,10 @@
   gtag('js', new Date());
   
   gtag('config', 'G-NWSD7YTB5C', {
-    'cookie_domain': 'auto'
+    'cookie_domain': 'auto',
+    'custom_map': {
+      'dimension1': 'trigger_element',
+      'dimension2': 'store_type'
+    }
   });
 </script>
