@@ -15,6 +15,9 @@ interface BubbleNode {
     isDragging: boolean;
     dragStartX: number;
     dragStartY: number;
+    baseX: number;    // Add base position to track original settling point
+    baseY: number;
+    floatOffset: number;  // Individual offset for asynchronous movement
 }
 
 export class BubbleLayout {
@@ -91,7 +94,10 @@ export class BubbleLayout {
             genre,
             isDragging: false,
             dragStartX: 0,
-            dragStartY: 0
+            dragStartY: 0,
+            baseX: 0,
+            baseY: 0,
+            floatOffset: Math.random() * Math.PI * 2 // Random starting phase
         };
         });
 
@@ -168,10 +174,18 @@ export class BubbleLayout {
     private animate(): void {
         if (!this.isRunning) return;
 
+        const currentTime = Date.now() / 1000;  // Time in seconds
+
         this.nodes.forEach(node => {
             if (node.isDragging) {
                 node.element.style.transform = `translate(${node.x - node.radius}px, ${node.y - node.radius}px)`;
                 return;
+            }
+
+            // Store base position once bubbles settle
+            if (Math.abs(node.vx) < 0.01 && Math.abs(node.vy) < 0.01) {
+                node.baseX = node.x;
+                node.baseY = node.y;
             }
 
             // Reduce gravity force (from 0.5 to 0.2)
@@ -203,11 +217,19 @@ export class BubbleLayout {
             });
 
             // Increase damping (from 0.95 to 0.98)
-            node.vx *= 0.98;  // Increased from 0.95
-            node.vy *= 0.98;  // Increased from 0.95
+            node.vx *= 0.65;  // Increased from 0.95
+            node.vy *= 0.65;  // Increased from 0.95
             
-            node.x += node.vx;
-            node.y += node.vy;
+            // Add gentle floating motion
+            const floatAmplitude = 2.0;  // Adjust for more/less movement
+            const floatFrequency = 0.5;  // Adjust for faster/slower cycles
+            
+            const floatX = Math.sin(currentTime * floatFrequency + node.floatOffset) * floatAmplitude;
+            const floatY = Math.cos(currentTime * floatFrequency + node.floatOffset) * floatAmplitude;
+
+            // Combine physics and floating movement
+            node.x += node.vx + floatX * 0.1;  // Scale down float effect
+            node.y += node.vy + floatY * 0.1;
 
             // Add smooth transition to the element's transform
             node.element.style.transition = 'transform 0.1s ease-out';
