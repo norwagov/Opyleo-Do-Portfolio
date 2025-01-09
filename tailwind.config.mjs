@@ -50,11 +50,25 @@ export default {
 						opacity: 1
 					}
 				},
+				scrollBounce: {
+					'0%, 20%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(110vh)' },
+					'65%': { transform: 'translateY(95vh)' },
+					'80%': { transform: 'translateY(100vh)' },
+					'90%': { transform: 'translateY(98vh)' },
+					'100%': { transform: 'translateY(100vh)' }
+				},
+				loadingBar: {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(100%)' }
+				}
 			},
 			animation: {
 				'slide-in-bounce-text': 'slideInBounceText 1.2s cubic-bezier(0.25, 1.25, 0.5, 1.5)',
 				'slide-in-bounce-svg': 'slideInBounceSvg 1.2s cubic-bezier(0.25, 1.25, 0.5, 1.5)',
-				'fadeIn': 'fadeIn 1.2s linear'
+				'fadeIn': 'fadeIn 1.2s linear',
+				'scroll-bounce': 'scrollBounce 1.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+				'loading-bar': 'loadingBar 1.5s ease-in-out infinite'
 			},
 			fontFamily: {
 				'poppins': ['Poppins'],
