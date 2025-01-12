@@ -1,3 +1,5 @@
+// bubbles.ts
+
 export interface Genre {
     name: string;
     popularity: number;

@@ -9,7 +9,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
 ---
 
 
-<html lang="""""pl" class="overflow-x-hidden no-scrollbar min-[460px]:overflow-y-hidden">
+<html lang="Cpl" class="overflow-x-hidden no-scrollbar min-[460px]:overflow-y-hidden">
         <head>
         <GoogleAnalyticsHead />
         <meta charset="UTF-8">
@@ -58,7 +58,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
     <body class="no-scrollbar overflow-x-hidden min-[460px]:overflow-y-hidden">
         <!-- Overlays section -->
         <!-- Loading overlay -->
-        <div id="loading-overlay" class="fixed inset-0 z-[9999] bg-highlight-1 flex items-center justify-center">
+        <div id="loading-overlay" class="hidden max-[460px]:flex fixed inset-0 z-[9999] bg-highlight-1 items-center justify-center">
             <div class="text-white text-4xl font-black flex flex-col items-center gap-4">
                 <!-- <span class="animate-pulse">opyleo</span> -->
                 <div class="loading-dots">
@@ -68,24 +68,6 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                // Disable scrolling while loading
-                document.body.style.overflow = 'hidden';
-                
-                // Hide overlay when everything is loaded
-                window.addEventListener('load', () => {
-                    const overlay = document.getElementById('loading-overlay');
-                    if (overlay) {
-                        overlay.classList.add('transition-opacity', 'duration-500', 'opacity-0');
-                        setTimeout(() => {
-                            overlay.style.display = 'none';
-                            document.body.style.overflow = '';
-                        }, 500);
-                    }
-                });
-            });
-        </script>
         <!-- Non-mobile overlay -->
         <div class="fixed min-[460px]:flex hidden inset-0 items-center justify-center bg-[#ED9CA1] z-50">
             <div class="flex flex-col min-[1200px]:items-end max-[1200px]:items-center min-[1200px]:flex-row wx-full justify-center gap-6">
@@ -127,9 +109,9 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 </div>
             </div>
         </div>
-        <section
-            style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);"
-            class="h-[100svh]">
+        <section 
+            style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);" 
+            class="h-[100lvh]">
             <header class="shadow-xl h-[10svh] bg-highlight-1 flex flex-row justify-center items-center text-white font-poppins font-bold text-2xl p-6">
                 <h1>opyleo</h1>
                 <div class="flex-grow"></div>
@@ -139,7 +121,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 </button>
                 <MobileAppPopup triggerSelector="#header-download-app-button" />
             </header>
-            <div class="h-[90vh] flex flex-col">
+            <div class="h-[90lvh] flex flex-col">
                 <div class="flex-grow flex items-center justify-center header-of-hero">
                     <div class="scroll-wrapper">
                         <div class="scroll-animate-heading">
@@ -170,91 +152,13 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                         </svg>
                         <span class="sr-only">Scroll down by 20%</span>
                     </button>
-                    <script>
-                        const scrollButton = document.getElementById('scroll-button');
-                        if (scrollButton) {
-                            scrollButton.addEventListener('click', (e) => {
-                                e.preventDefault();
-                                
-                                const targetSection = document.querySelector('section:nth-of-type(2)') as HTMLElement;
-                                if (!targetSection) return;
-                    
-                                const config = {
-                                    duration: 1500,
-                                    overscrollHeight: 100,
-                                    speedFactor: 0.8,
-                                    phase1End: 0.6
-                                };
-                    
-                                const startPosition = window.scrollY;
-                                const targetPosition = targetSection.offsetTop;
-                                const distance = targetPosition - startPosition;
-                                let start: number | null = null;
-                                let isAnimating = true;
-                    
-                                const scrollHandler = () => {
-                                    if (isAnimating) {
-                                        isAnimating = false;
-                                        window.removeEventListener('wheel', scrollHandler);
-                                        window.removeEventListener('touchmove', scrollHandler);
-                                    }
-                                };
-                    
-                                window.addEventListener('wheel', scrollHandler, { passive: false });
-                                window.addEventListener('touchmove', scrollHandler, { passive: false });
-                    
-                                function easeOutCubic(x: number): number {
-                                    return 1 - Math.pow(1 - x, 3);
-                                }
-                    
-                                function animation(currentTime: number): void {
-                                    if (!isAnimating) return;
-                                    if (start === null) start = currentTime;
-                                    
-                                    const elapsed = currentTime - start;
-                                    const progress = Math.min(elapsed / config.duration, 1);
-                    
-                                    let currentOffset: number;
-                    
-                                    if (progress < config.phase1End) {
-                                        // Going to overscroll position
-                                        const p = progress / config.phase1End;
-                                        const smooth = easeOutCubic(p);
-                                        currentOffset = distance * smooth + (config.overscrollHeight * smooth);
-                                    } else {
-                                        // Returning from overscroll
-                                        const p = (progress - config.phase1End) / (1 - config.phase1End);
-                                        const smooth = 1 - Math.pow(1 - p, 4);
-                                        currentOffset = distance + config.overscrollHeight * (1 - smooth);
-                                    }
-                    
-                                    if (progress === 1) {
-                                        currentOffset = distance;
-                                        window.removeEventListener('wheel', scrollHandler);
-                                        window.removeEventListener('touchmove', scrollHandler);
-                                    }
-                    
-                                    window.scrollTo({
-                                        top: startPosition + currentOffset,
-                                        behavior: 'auto'
-                                    });
-                    
-                                    if (progress < 1 && isAnimating) {
-                                        requestAnimationFrame(animation);
-                                    }
-                                }
-                    
-                                requestAnimationFrame(animation);
-                            });
-                        }
-                    </script>
                 </div>
             </div>
         </div>
         </section>
         <section
             style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
-            class="relative z-0 h-screen flex justify-center items-center font-bold">
+            class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
             <div class="relative z-0">
                 <div>
                     <img
@@ -307,31 +211,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
             <div class="h-[10%] w-full"></div>
         </section>
         <script>
-            import { BubbleLayout, type Genre } from '../js/bubbles';
-
-            document.addEventListener('DOMContentLoaded', function() {
-              const genres: Genre[] = [
-                { name: 'Horrory', popularity: 0.8 },
-                { name: 'Romansy', popularity: 1.0 },
-                { name: 'Fantastyka', popularity: 0.9 },
-                { name: 'Kryminały', popularity: 1.0 },
-                { name: 'Przygodowe', popularity: 0.85 },
-                { name: 'Podręczniki', popularity: 0.8 },
-                { name: 'Zbiory zadań', popularity: 0.7},
-                { name: 'Psychologia', popularity: 0.65}
-              ];
-
-              try {
-                const layout = new BubbleLayout('bubbles-container', genres);
-
-                // Cleanup on page unload
-                window.addEventListener('unload', () => {
-                  layout.destroy();
-                });
-              } catch (error) {
-                console.error('Failed to initialize bubble layout:', error);
-              }
-            });
+            
           </script>
           <style>
             :global(.genre-bubble) {
@@ -351,7 +231,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
           </style>
         <section
             style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
-            class="relative z-0 h-screen flex justify-center items-center font-bold">
+            class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
             <div class="transform scale-x-[-1] relative z-0">
                 <div>
                     <img
@@ -438,47 +318,38 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 <a>Regulamin</a>
             </div>
         </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if svh/lvh is supported
-            if (!CSS.supports('height', '100svh')) {
-            // Get all elements with vh units
-            const sections = document.querySelectorAll('section');
-            const footer = document.querySelector('footer');
+        <script src="../js/correctHeights.ts"></script>
+        <script src="../js/scrollButton.ts"></script>
+        <script src="../js/loadingOverlay.js"></script>
+        <script>
+            // Bubbles init script
+            
+            import { BubbleLayout, type Genre } from '../js/bubbles';
 
-            function setHeights() {
-                const viewportHeight = window.innerHeight;
+            document.addEventListener('DOMContentLoaded', function() {
+            const genres: Genre[] = [
+                { name: 'Horrory', popularity: 0.8 },
+                { name: 'Romansy', popularity: 1.0 },
+                { name: 'Fantastyka', popularity: 0.9 },
+                { name: 'Kryminały', popularity: 1.0 },
+                { name: 'Przygodowe', popularity: 0.85 },
+                { name: 'Podręczniki', popularity: 0.8 },
+                { name: 'Zbiory zadań', popularity: 0.7},
+                { name: 'Psychologia', popularity: 0.65}
+            ];
 
-                sections.forEach(section => {
-                const sectionElement = section as HTMLElement;
-                // Convert 85vh to pixels
-                if (sectionElement.classList.contains('h-[85vh]')) {
-                    sectionElement.style.height = `${viewportHeight * 0.85}px`;
-                }
-                // Convert 100vh to pixels
-                if (sectionElement.classList.contains('h-[100vh]')) {
-                    sectionElement.style.height = `${viewportHeight}px`;
-                }
+            try {
+                const layout = new BubbleLayout('bubbles-container', genres);
+
+                // Cleanup on page unload
+                window.addEventListener('unload', () => {
+                layout.destroy();
                 });
-
-                // Handle footer (15vh)
-                if (footer) {
-                footer.style.height = `${viewportHeight * 0.15}px`;
-                }
+            } catch (error) {
+                console.error('Failed to initialize bubble layout:', error);
             }
-
-            // Set heights initially
-            setHeights();
-
-            // Update heights when viewport resizes or orientation changes
-            window.addEventListener('resize', setHeights);
-            window.addEventListener('orientationchange', setHeights);
-            }
-        });
+            });
         </script>
-    <script>
-
-    </script>
     </body>
 </html>
 
