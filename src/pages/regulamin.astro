@@ -1,0 +1,124 @@
+---
+import '../css/global.css';
+import '../css/tailwind.css';
+---
+
+<html lang="pl" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Regulamin | Opyleo</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </head>
+    <body class="bg-gradient-to-br from-highlight-2/10 to-white min-h-screen font-poppins">
+        <!-- Header -->
+        <header class="shadow-xl h-[10svh] bg-highlight-1 flex flex-row justify-between items-center text-white font-poppins p-6 mb-12">
+            <div class="flex items-center gap-2 w-[88px]"> <!-- Fixed width to match spacer -->
+                <a 
+                    href="/Opyleo-Landing-Page" 
+                    class="text-white hover:text-highlight-2 transition-all duration-300 flex items-center gap-2 text-sm"
+                >
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="2.5" 
+                        stroke="currentColor" 
+                        class="w-5 h-5"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" 
+                        />
+                    </svg>
+                    <span>Powrót</span>
+                </a>
+            </div>
+            <a 
+                href="/Opyleo-Landing-Page" 
+                class="text-2xl font-bold transition-transform duration-300 hover:scale-110"
+            >
+                opyleo
+            </a>
+            <div class="w-[88px]"></div> <!-- Matching spacer -->
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-12 md:px-8 lg:px-16 max-w-4xl">
+            <h1 class="text-4xl font-bold text-highlight-1 mb-12">Regulamin</h1>
+            
+            <div class="prose prose-lg max-w-none space-y-12">
+                <p class="text-gray-600 text-lg leading-relaxed">
+                    Niniejszy Regulamin określa zasady korzystania z naszego systemu, w tym obowiązki i prawa użytkowników oraz warunki świadczenia naszych usług. Korzystanie z naszego systemu oznacza akceptację poniższych warunków.
+                </p>
+
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">1. Zasady Korzystania z Systemu</h2>
+                <ul class="space-y-4 text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <span class="text-highlight-1 mt-1">•</span>
+                        <span class="leading-relaxed">Użytkownicy muszą zachować ostrożność podczas udostępniania danych osobowych.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-highlight-1">•</span>
+                        Użytkownicy mogą publikować ogłoszenia lub wpisy publicznie widoczne na naszej platformie.
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-highlight-1">•</span>
+                        Zakazane jest publikowanie treści niezgodnych z prawem, wulgarnych, obraźliwych.
+                    </li>
+                </ul>
+
+                <h2 class="text-2xl font-bold text-highlight-3 mb-4">2. Płatności</h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start gap-2">
+                        <span class="text-highlight-1">•</span>
+                        Przy przetwarzaniu płatności korzystamy z zewnętrznego dostawcy bramki płatności PayU.
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-highlight-1">•</span>
+                        Oferujemy usługę promowania ogłoszeń, która wyróżnia ogłoszenie.
+                    </li>
+                </ul>
+
+                <h2 class="text-2xl font-bold text-highlight-3 mb-4">3. Reklamy</h2>
+                <div class="space-y-3 text-gray-600">
+                    <p>W naszej aplikacji wyświetlane są reklamy dostarczane przez Admob.</p>
+                    <p>
+                        Więcej informacji w 
+                        <a href="https://policies.google.com/privacy" target="_blank" class="text-highlight-1 hover:text-highlight-2 transition-colors">
+                            Polityce Prywatności Google
+                        </a>
+                    </p>
+                </div>
+
+                <h2 class="text-2xl font-bold text-highlight-3 mb-4">4. Reklamacje</h2>
+                <div class="space-y-3 text-gray-600">
+                    <p>Reklamacje należy zgłaszać poprzez kontakt z obsługą klienta pod adresem email: 
+                        <a href="mailto:opyleoproject@gmail.com" class="text-highlight-1 hover:text-highlight-2 transition-colors">
+                            opyleoproject@gmail.com
+                        </a>
+                    </p>
+                </div>
+
+                <h2 class="text-2xl font-bold text-highlight-3 mb-4">5. Informacje o Firmie</h2>
+                <div class="space-y-2 text-gray-600">
+                    <p>Firma: ANDRZEJ NOWAKOWSKI DBE</p>
+                    <p>Adres: ul. Wyścigowa 56C/18, 53-012 Wrocław</p>
+                    <p>NIP: 6931894244</p>
+                    <p>REGON: 932998570</p>
+                    <p>Email: <a href="mailto:biuro@dbe.pl" class="text-highlight-1 hover:text-highlight-2 transition-colors">biuro@dbe.pl</a></p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer with proper spacing -->
+        <footer class="mt-16 py-8 bg-background-3 text-white">
+            <div class="container mx-auto px-4 text-center text-sm">
+                <p class="text-gray-400">Ten Regulamin został ostatnio zaktualizowany 23.07.2024.</p>
+            </div>
+        </footer>
+    </body>
+</html>

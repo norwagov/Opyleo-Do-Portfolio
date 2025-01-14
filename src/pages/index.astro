@@ -37,7 +37,6 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
             href="/Opyleo-Landing-Page/section-5.png"
             as="image"
         >
-
         <title>Opyleo</title>
         <style>
             /* Add loading styles */
@@ -122,7 +121,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 <MobileAppPopup triggerSelector="#header-download-app-button" />
             </header>
             <div class="h-[90lvh] flex flex-col">
-                <div class="flex-grow flex items-center justify-center header-of-hero">
+                <div class="grow flex items-center justify-center header-of-hero">
                     <div class="scroll-wrapper">
                         <div class="scroll-animate-heading">
                             <span>Witaj w <b class="font-black">Opyleo</b></span>
@@ -132,7 +131,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                     </div>
                 </div>
             <Swiper />
-            <div class="flex-grow flex justify-end items-center">
+            <!-- <div class="flex-grow flex justify-end items-center">
                 <div class="flex justify-end items-center footer-of-hero">
                     <div class="sell-books-text max-[370px]:text-lg">
                         Sprzedawaj <b class="font-black">książki</b>
@@ -152,7 +151,8 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                         </svg>
                         <span class="sr-only">Scroll down by 20%</span>
                     </button>
-                </div>
+                </div> -->
+                <div class="h-[15svh]"></div>
             </div>
         </div>
         </section>
@@ -313,9 +313,9 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
         <footer class="flex justify-evenly h-[15lvh] bg-background-3 text-white items-center">
             <div style="border-right: #777 solid 1px; color: #BBB" class="w-2/5 text-center"><b>Opyleo 2025</b></div>
             <div class="footer-font w-3/5 text-center">
-                <a>Polityka prywatności</a>
+                <a href="Opyleo-Landing-Page/polityka-prywatnosci">Polityka prywatności</a>
                 <br/>
-                <a>Regulamin</a>
+                <a href="Opyleo-Landing-Page/regulamin">Regulamin</a>
             </div>
         </footer>
         <script src="../js/correctHeights.ts"></script>
