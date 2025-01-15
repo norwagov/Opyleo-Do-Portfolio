@@ -65,42 +65,50 @@ const shortTitle = truncateTitle(
 );
 ---
 <style>
+    /* Default aspect ratio */
     .aspect-responsive {
-        @apply aspect-[7/12];
+        aspect-ratio: 7/12;
     }
 
-    /* Medium viewport */
-    @media (min-height: 801px) and (max-height: 900px) {
+    /* Large devices (tablets and larger) */
+    @media (min-height: 800px) {
         .aspect-responsive {
-            aspect-ratio: 25/36;
-        }
-        .compact-on-medium {
-            @apply text-xs;
-        }
-        .state-hidden {
-            @apply hidden;
+            aspect-ratio: 7/12;
         }
     }
 
-    /* Small viewport - adjusted rules */
-    @media (max-height: 800px) {
+    /* Medium devices (larger phones) */
+    @media (min-height: 599px) and (max-height: 799px) {
         .aspect-responsive {
-            aspect-ratio: 25/34; /* Slightly shorter ratio for small viewports */
-        }
-        .details-container {
-            @apply py-2; /* Reduced padding */
-        }
-        /* .title-responsive {
-            @apply !text-sm;
+            aspect-ratio: 2/3;
         }
         .price-responsive {
-            @apply !text-sm mt-1;
-        } */
+            @apply text-base;
+        }
+        .title-responsive {
+            @apply text-sm;
+        }
+    }
+
+    /* Small devices (iPhone SE and similar) */
+    @media (max-height: 499px) {
+        .aspect-responsive {
+            aspect-ratio: 5/7;
+        }
+        .details-container {
+            @apply py-1;
+        }
         .hide-on-small {
-            @apply hidden;
+            display: none;
         }
         .description-small {
-            @apply h-full justify-around
+            @apply h-full justify-around;
+        }
+        .price-responsive {
+            @apply text-sm;
+        }
+        .title-responsive {
+            @apply text-xs;
         }
     }
 </style>
