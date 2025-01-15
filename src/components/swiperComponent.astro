@@ -10,10 +10,10 @@ const books = await getBooks();
 const state = ["Zły", "Umiarkowany", "Dobry", "Bardzo dobry"];
 ---
 
-    <div class="w-screen flex items-center" id="swiper-wrapper">
+    <div class="w-screen container-type-swiper" id="swiper-wrapper">
       <MobileAppPopup triggerSelector="#swiper-wrapper" />
-      <div class="swiper overflow-visible">
-        <div class="swiper-wrapper">
+      <div class="swiper overflow-visible h-full">
+          <div class="swiper-wrapper">
           {books.map((book) => (
             <div class="swiper-slide !flex items-center">
               <CardTemplate
@@ -39,6 +39,10 @@ const state = ["Zły", "Umiarkowany", "Dobry", "Bardzo dobry"];
       body {
         overscroll-behavior: none;
       }
+      /* .container-type-swiper {
+        container-type: size;
+        container-name: swiper;
+      } */
     </style>
 
     <script>
