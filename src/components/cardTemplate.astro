@@ -135,22 +135,47 @@ function measureTextWidth(text: string, font: string): number {
 function truncateToFit(
     title: string,
     maxWidth: number,
-    font: string
+    font: string,
+    allowTwoLines: boolean = false
 ): string {
     const words = title.split(' ');
-    let result = '';
     const ellipsis = '...';
     
-    // First measure with all words
+    if (allowTwoLines) {
+        // Try to fit in two lines
+        const firstLine: string[] = [];
+        const secondLine: string[] = [];
+        let firstLineWidth = 0;
+        let secondLineWidth = 0;
+        
+        // Process words
+        for (const word of words) {
+            const wordWidth = measureTextWidth(word + ' ', font);
+            
+            if (firstLineWidth + wordWidth <= maxWidth) {
+                firstLine.push(word);
+                firstLineWidth += wordWidth;
+            } else if (secondLineWidth + wordWidth <= maxWidth) {
+                secondLine.push(word);
+                secondLineWidth += wordWidth;
+            } else {
+                // Won't fit in two lines
+                if (secondLine.length > 0) {
+                    secondLine.pop();
+                }
+                break;
+            }
+        }
+        
+        if (secondLine.length > 0) {
+            return `${firstLine.join(' ')}\n${secondLine.join(' ')}${ellipsis}`;
+        }
+    }
+    
+    // Fall back to single line truncation
     let currentText = words.join(' ') + ellipsis;
     let currentWidth = measureTextWidth(currentText, font);
     
-    // If it fits, return the full text
-    if (currentWidth <= maxWidth) {
-        return title;
-    }
-    
-    // If not, remove words from the end until it fits
     while (words.length > 0 && currentWidth > maxWidth) {
         words.pop();
         currentText = words.join(' ') + ellipsis;
@@ -170,8 +195,16 @@ function initializeTitleTruncation() {
         const availableWidth = titleEl.clientWidth;
         const font = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
         
-        const truncatedText = truncateToFit(originalText, availableWidth, font);
+        // Check if we're on a small device (height < 600px)
+        const allowTwoLines = window.innerHeight < 600;
+        
+        const truncatedText = truncateToFit(originalText, availableWidth, font, allowTwoLines);
         titleEl.textContent = truncatedText;
+        
+        if (allowTwoLines) {
+            titleEl.style.whiteSpace = 'pre-line';
+            titleEl.style.lineHeight = '1.2';
+        }
     });
 }
 
