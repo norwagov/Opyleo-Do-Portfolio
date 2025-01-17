@@ -1,12 +1,12 @@
 :root {
-  --highlight-1: #B80054;
-  --highlight-2: #D76F9F;
-  --highlight-3: #500027;
+  --highlight-1: #ffffff; /* #B80054; */
+  --highlight-2: #000000; /* #D76F9F; */
+  --highlight-3: #b5b5b5; /* #500027; */
   --background-1: #FFFFFF;
   --background-2: #EEEEEE;
   --background-3: #2E2E2E;
   --text-1: #000000;
-  --text-2: #767676;
+  --text-2: #ffffff;
 }
 
 @tailwind base;
