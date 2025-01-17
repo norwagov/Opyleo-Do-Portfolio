@@ -78,11 +78,11 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 </div>
                 <div class="flex flex-col gap-10">
                     <div class="flex flex-col">
-                        <p class="text-2xl sm:!text-3xl md:!text-4xl text-center font-bold text-white animate-slide-in-bounce-text">
-                        Pełną parą pracujemy nad stronką dla ciebie!
+                        <p class="text-2xl min-[360px]:!text-3xl text-center font-bold text-white animate-slide-in-bounce-text">
+                            Pełną parą pracujemy nad stronką dla ciebie!
                         </p>
-                        <p class="text-lg sm:!text-xl md:!text-2xl text-center font-bold text-white mt-6 animate-slide-in-bounce-text delay-200">
-                        Czemu nie rzucisz okiem na naszą apkę w międzyczasie?
+                        <p class="text-lg min-[360px]:!text-xl text-center font-bold text-white mt-6 animate-slide-in-bounce-text delay-200">
+                            Czemu nie rzucisz okiem na naszą apkę w międzyczasie?
                         </p>
                     </div>
                     <div class="flex justify-center flex-row gap-4 mb-4 font-bold animate-fadeIn delay-500">
@@ -167,16 +167,16 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 <div>
                     <div class="relative h-screen">
                         <div class="absolute bottom-0 right-0 h-[150vw] w-[150vw] bg-white/40 backdrop-blur-2xl translate-x-[40%] translate-y-[30%] rounded-full">
-                            <p class="text-right font-bold text-2xl translate-x-[-42%] translate-y-[150%]">
+                            <p class="text-right font-bold text-xl min-[360px]:!text-2xl translate-x-[-42%] translate-y-[150%]">
                                 Opyleo,<br>
                                 ekologiczniej się nie da!<br>
-                                <div class="text-right text-2xl font-extralight translate-x-[-42%] translate-y-[80%]">
-                                    Lorem ipsum dolor sit amet,<br>
-                                    consectetur adipiscing elit.<br>
-                                    Aenean elementum<br>
-                                    lacus a purus eleifend convallis.
-                                </div>
                             </p>
+                            <div class="text-right text-xl min-[360px]:!text-2xl font-extralight translate-x-[-42%] translate-y-[80%]">
+                                Lorem ipsum dolor sit amet,<br>
+                                consectetur adipiscing elit.<br>
+                                Aenean elementum<br>
+                                lacus a purus eleifend convallis.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,32 +185,29 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
         <section
             style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);"
             class="relative z-0 h-screen flex flex-col items-center font-bold">
-            <div class="relative m-8">
-                <p class="text-4xl font-bold mb-4">Opyleo</p>
-                <p class="text-xl font-normal">Odkryj nasze kategorie i sprawdź, która najbardziej Ci się podoba!</p>
+            <div class="relative m-4 min-[360px]:m-8">
+                <p class="text-3xl min-[360px]:!text-4xl font-bold mb-2 min-[360px]:mb-4">Opyleo</p>
+                <p class="text-lg min-[360px]:!text-xl font-normal">Odkryj nasze kategorie i sprawdź, która najbardziej Ci się podoba!</p>
             </div>
             <div id="bubbles-container" class="relative flex-grow w-full"></div>
             <div class="h-[10%] w-full"></div>
         </section>
-        <script>
-            
-          </script>
-          <style>
+        <style>
             :global(.genre-bubble) {
-              position: absolute;
-              border-radius: 50%;
-              background: rgba(0, 0, 0, 0.1);
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              transition: transform 0.1s ease-out;
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.1s ease-out;
             }
 
             :global(.genre-bubble-text) {
-              text-align: center;
-              user-select: none;
+                text-align: center;
+                user-select: none;
             }
-          </style>
+        </style>
         <section
             style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
             class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
@@ -240,16 +237,16 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
                 <div>
                     <div class="relative h-screen">
                         <div class="absolute bottom-0 right-0 h-[150vw] w-[150vw] bg-white/40 backdrop-blur-2xl translate-x-[-8%] translate-y-[30%] rounded-full">
-                            <p class="text-left font-bold text-2xl translate-x-[44%] translate-y-[150%]">
+                            <p class="text-left font-bold text-xl min-[360px]:!text-2xl translate-x-[44%] translate-y-[150%]">
                                 Wrzuć zdjęcie,<br>
                                 a resztę zostaw nam!<br>
-                                <div class="text-left text-2xl font-extralight translate-x-[44%] translate-y-[80%]">
-                                    Lorem ipsum dolor sit amet,<br>
-                                    consectetur adipiscing elit.<br>
-                                    Aenean elementum<br>
-                                    lacus a purus eleifend convallis.
-                                </div>
                             </p>
+                            <div class="text-left text-xl min-[360px]:!text-2xl font-extralight translate-x-[44%] translate-y-[80%]">
+                                Lorem ipsum dolor sit amet,<br>
+                                consectetur adipiscing elit.<br>
+                                Aenean elementum<br>
+                                lacus a purus eleifend convallis.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -266,19 +263,19 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
             ></div>
         </div>
 
-        <!-- Rest of your section content -->
-        <!-- Header Text -->
-        <div class="absolute top-10 w-full text-center text-xl text-highlight-3 z-20">
-            <p>To co chcesz dziś poczytać? :D</p>
-        </div>
+            <!-- Rest of your section content -->
+            <!-- Header Text -->
+            <div class="absolute top-[8%] min-[360px]:top-[10%] w-full text-center text-highlight-3 z-20">
+                <p class="text-lg min-[360px]:!text-xl">To co chcesz dziś poczytać? :D</p>
+            </div>
 
             <!-- Download Button -->
             <button id="cta-download-app-button"
-                    class="absolute top-[15%] left-1/2 transform -translate-x-1/2 bg-highlight-3 text-sm text-white py-2 px-4 rounded-lg inline-flex items-center justify-center shadow-lg z-20">
-                <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                class="absolute top-[18%] min-[360px]:top-[20%] left-1/2 transform -translate-x-1/2 bg-highlight-3 text-white py-2 px-4 min-[360px]:py-3 min-[360px]:px-6 rounded-lg inline-flex items-center justify-center shadow-lg z-20 transition-all duration-300">
+                <svg class="fill-current w-4 h-4 min-[360px]:w-5 min-[360px]:h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
                 </svg>
-                <span>Pobierz</span>
+                <span class="text-sm min-[360px]:!text-base">Pobierz</span>
             </button>
 
             <!-- Image (Below Gradient) -->
@@ -294,7 +291,7 @@ import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
         </section>
         <footer class="flex justify-evenly h-[15lvh] bg-background-3 text-white items-center">
             <div style="border-right: #777 solid 1px; color: #BBB" class="w-2/5 text-center"><b>Opyleo 2025</b></div>
-            <div class="footer-font w-3/5 text-center">
+            <div class="footer-font w-3/5 text-center text-sm min-[360px]:!text-base">
                 <a href="polityka-prywatnosci">Polityka prywatności</a>
                 <br/>
                 <a href="regulamin">Regulamin</a>
