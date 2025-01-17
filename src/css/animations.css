@@ -22,13 +22,25 @@
 }
 
 .scroll-animate-heading span {
-  height: 1.5em;
-  line-height: 1.5em;
+  height: 1.5em;      /* Reduced from 2em to better match text line height */
+  line-height: 1.5em; /* Match height for consistent spacing */
   background: #000;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: block;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 359px) {
+  .scroll-wrapper {
+      height: 2.5em;    /* Adjusted to match new line height */
+  }
+  
+  .scroll-animate-heading span {
+      height: 1.5em;    /* Keep consistent with larger screens */
+      line-height: 1.5em;
+  }
 }
 
 
