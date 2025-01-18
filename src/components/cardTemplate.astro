@@ -189,13 +189,15 @@ function initializeTitleTruncation() {
     const titleElements = document.querySelectorAll('.title-responsive');
     
     titleElements.forEach(element => {
+        // Check if element was already processed
+        if (element.hasAttribute('data-truncated')) return;
+
         const titleEl = element as HTMLElement;
         const originalText = titleEl.getAttribute('data-original-title') || titleEl.textContent || '';
         const computedStyle = window.getComputedStyle(titleEl);
         const availableWidth = titleEl.clientWidth;
         const font = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
         
-        // Check if we're on a small device (height < 600px)
         const allowTwoLines = window.innerHeight < 600;
         
         const truncatedText = truncateToFit(originalText, availableWidth, font, allowTwoLines);
@@ -205,10 +207,12 @@ function initializeTitleTruncation() {
             titleEl.style.whiteSpace = 'pre-line';
             titleEl.style.lineHeight = '1.2';
         }
+
+        // Mark as processed
+        titleEl.setAttribute('data-truncated', 'true');
     });
 }
 
-// Run on load and resize
+// Run only on load, remove resize listener
 window.addEventListener('load', initializeTitleTruncation);
-window.addEventListener('resize', initializeTitleTruncation);
 </script>
