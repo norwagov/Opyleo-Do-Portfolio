@@ -28,7 +28,13 @@ export async function getBooks(): Promise<Book[]> {
             if(i > 1){
                 page = "?page=" + i.toString();
             }
-            let response = await fetch(api_url + page);
+            let response = await fetch(api_url + page, {
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
             if(!response.ok){
                 throw new Error(`Error: ${response.statusText}`);
             }
