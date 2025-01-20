@@ -12,20 +12,20 @@ import '../css/tailwind.css';
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     </head>
-    <body class="bg-gradient-to-br bg-highlight-2 min-h-screen font-poppins">
+    <body class="bg-gradient-to-br from-highlight-2/10 to-white min-h-screen font-poppins">
         <!-- Header -->
-        <header class="shadow-xl h-[10svh] bg-highlight-1 flex flex-row justify-between items-center font-poppins p-6 mb-12">
+        <header class="shadow-xl h-[10svh] bg-highlight-1 flex flex-row justify-between items-center text-white font-poppins p-6 mb-12">
             <div class="flex items-center gap-2 w-[88px]">
                 <a 
                     href="/Opyleo-Landing-Page" 
-                    class="text-highlight-2 flex items-center gap-2 text-sm"
+                    class="text-white hover:text-highlight-2 transition-all duration-300 flex items-center gap-2 text-sm"
                 >
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke-width="2.5" 
-                        stroke="#000" 
+                        stroke="currentColor" 
                         class="w-5 h-5"
                     >
                         <path 
@@ -34,7 +34,7 @@ import '../css/tailwind.css';
                             d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" 
                         />
                     </svg>
-                    <span class="text-highlight-2">Powrót</span>
+                    <span>Powrót</span>
                 </a>
             </div>
             <a 
@@ -51,12 +51,12 @@ import '../css/tailwind.css';
             <h1 class="text-4xl font-bold text-highlight-1 mb-12">Polityka Prywatności</h1>
             
             <div class="prose prose-lg max-w-none space-y-12">
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Niniejsza Polityka Prywatności określa zasady zbierania, wykorzystywania i udostępniania danych osobowych przez nasz system. Zobowiązujemy się do ochrony prywatności i bezpieczeństwa danych osobowych naszych użytkowników zgodnie z wymogami Rozporządzenia o Ochronie Danych Osobowych (RODO).
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">1. Dane, Które Zbieramy</h2>
-                <ul class="space-y-4 text-highlight-3">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">1. Dane, Które Zbieramy</h2>
+                <ul class="space-y-4 text-gray-600">
                     <li><strong>Dane Osobowe:</strong> Zbieramy adresy e-mail oraz imiona i nazwiska od użytkowników podczas rejestracji lub gdy zostaną nam przekazane dobrowolnie.</li>
                     <li><strong>Informacje o Płatnościach:</strong> Przy przetwarzaniu płatności korzystamy z zewnętrznego dostawcy bramki płatności o nazwie PayU. Nie przechowujemy żadnych szczegółów kart płatniczych w naszym systemie. Polityka prywatności PayU reguluje zbieranie i wykorzystanie informacji o płatnościach.</li>
                     <li><strong>Komunikacja Między Użytkownikami:</strong> Nasz system ułatwia komunikację między użytkownikami, w tym funkcje wiadomości. Użytkownicy powinni zachować ostrożność podczas udostępniania danych osobowych za pomocą tych kanałów.</li>
@@ -68,76 +68,76 @@ import '../css/tailwind.css';
                     <li><strong>Informacje o Lokalizacji:</strong> Zbieramy informacje o lokalizacji użytkowników w formie województwa i miasta zamieszkania. Informacje te są przechowywane w naszej bazie danych i wykorzystywane w celu dostosowywania usług do lokalizacji użytkowników.</li>
                 </ul>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">2. Wykorzystanie Zebranych Informacji</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">2. Wykorzystanie Zebranych Informacji</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Wykorzystujemy dane osobowe w celu świadczenia, utrzymania i ulepszania naszych usług, w tym dostosowywania doświadczenia użytkownika i odpowiadania na zapytania użytkowników lub prośby o pomoc.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Informacje o płatnościach przetwarzane są bezpiecznie za pomocą PayU wyłącznie w celach transakcyjnych.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Funkcje komunikacyjne są udostępnione w celu ułatwienia interakcji między użytkownikami w ramach systemu. Użytkownicy są odpowiedzialni za treści, które udostępniają przez te kanały komunikacyjne.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Promowanie i podbijanie ofert są narzędziami mającymi na celu zwiększenie widoczności ogłoszeń użytkowników w naszym systemie. Promowanie wyróżnia ogłoszenie na określony czas, a podbijanie powoduje jednorazowe przesunięcie ogłoszenia na górę listy.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Informacje o lokalizacji są wykorzystywane do dostosowywania usług do lokalizacji użytkowników oraz poprawy funkcjonalności systemu.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Po dodaniu ogłoszenia, jest ono sprawdzane pod kątem poprawności treści. Należy jednak pamiętać, że administratorzy systemu mogą popełniać błędy, a treści mogą nie zawsze być zgodne z zasadami i wytycznymi.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">3. Udostępnianie Informacji</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">3. Udostępnianie Informacji</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Informacje osobowe mogą być udostępniane zaufanym dostawcom usług lub partnerom, którzy pomagają nam w działalności naszego systemu, prowadzeniu biznesu lub obsłudze użytkowników. Te strony są zobowiązane umowami do zachowania poufności tych informacji i są zabronione od ich używania w jakimkolwiek innym celu niż świadczenie usług nam.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">4. Środki Bezpieczeństwa</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">4. Środki Bezpieczeństwa</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Wdrażamy odpowiednie środki bezpieczeństwa w celu ochrony przed nieautoryzowanym dostępem, zmianą, ujawnieniem lub zniszczeniem danych osobowych użytkowników przechowywanych w naszym systemie.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Pomimo naszych najlepszych starań, żaden sposób przekazu przez internet lub przechowywania danych elektronicznych nie jest całkowicie bezpieczny. Użytkownicy powinni być świadomi inherentnych ryzyk związanych z przekazywaniem danych osobowych online.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">5. Zgoda</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">5. Zgoda</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Korzystając z naszego systemu, użytkownicy wyrażają zgodę na zbieranie, wykorzystywanie i udostępnianie swoich danych osobowych zgodnie z opisaną w niniejszej Polityce Prywatności.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">6. Zmiany w Polityce Prywatności</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">6. Zmiany w Polityce Prywatności</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Zastrzegamy sobie prawo do aktualizacji lub modyfikacji niniejszej Polityki Prywatności w dowolnym momencie. Wszelkie zmiany będą odzwierciedlone na tej stronie, a użytkownicy są zachęcani do regularnego sprawdzania Polityki Prywatności w celu uzyskania aktualnych informacji.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">7. Kontakt</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">7. Kontakt</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Jeśli mają Państwo jakiekolwiek pytania lub obawy dotyczące tej Polityki Prywatności lub przetwarzania Państwa danych osobowych, prosimy o kontakt pod adresem <a href="mailto:opyleoproject@gmail.com">opyleoproject@gmail.com</a>.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">8. Usuwanie Konta</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">8. Usuwanie Konta</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Użytkownicy mają prawo do usunięcia swojego konta w naszym systemie. Aby to zrobić, należy kliknąć przycisk "usuń konto" w sekcji profil.
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Administrator zastrzega sobie prawo do zachowania niektórych danych użytkownika w celach archiwalnych lub zgodnie z wymogami prawnymi.
                 </p>
 
-                <h2 class="text-2xl font-bold text-highlight-1 mb-6">9. Informacje o Firmie</h2>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <h2 class="text-2xl font-bold text-highlight-3 mb-6">9. Informacje o Firmie</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Firma: ANDRZEJ NOWAKOWSKI DBE
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Adres: ul. Wyścigowa 56C/18, 53-012 Wrocław
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     NIP: 6931894244
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     REGON: 932998570
                 </p>
-                <p class="text-highlight-3 text-lg leading-relaxed">
+                <p class="text-gray-600 text-lg leading-relaxed">
                     Email: <a href="mailto:biuro@dbe.pl">biuro@dbe.pl</a>
                 </p>
             </div>
@@ -146,7 +146,7 @@ import '../css/tailwind.css';
         <!-- Footer -->
         <footer class="mt-16 py-8 bg-background-3 text-white">
             <div class="container mx-auto px-4 text-center text-sm">
-                <p class="text-white">Ta Polityka Prywatności została ostatnio zaktualizowana 23.07.2024.</p>
+                <p class="text-gray-400">Ta Polityka Prywatności została ostatnio zaktualizowana 23.07.2024.</p>
             </div>
         </footer>
     </body>

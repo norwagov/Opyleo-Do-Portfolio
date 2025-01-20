@@ -24,7 +24,7 @@
 .scroll-animate-heading span {
   height: 1.5em;      /* Reduced from 2em to better match text line height */
   line-height: 1.5em; /* Match height for consistent spacing */
-  background: #fff;
+  background: #000;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -150,6 +150,10 @@
   user-select: none;
 }
 
+.footer-font {
+  /* font-family: "Times New Roman"; */
+  color: #AAAAAA;
+}
 
 .loading-dots {
   display: flex;
