@@ -48,7 +48,7 @@ export class BubbleLayout {
         this.centerY = this.height / 2;
         
         // Define the responsiveness coefficient
-        if (this.height < 400) { 
+        if (this.height < 350) { 
             this.responsivenessCoefficient = 0.6;
         } else if (this.height < 500) {
             this.responsivenessCoefficient = 0.8;

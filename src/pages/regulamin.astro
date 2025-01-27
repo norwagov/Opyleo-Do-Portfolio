@@ -1,6 +1,7 @@
 ---
 import '../css/global.css';
 import '../css/tailwind.css';
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <html lang="pl" class="scroll-smooth">
@@ -11,6 +12,7 @@ import '../css/tailwind.css';
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <ClientRouter />
     </head>
     <body class="bg-gradient-to-br from-highlight-2/10 to-white min-h-screen font-poppins">
         <!-- Header -->
@@ -19,6 +21,7 @@ import '../css/tailwind.css';
                 <a 
                     href="/Opyleo-Landing-Page" 
                     class="text-white hover:text-highlight-2 transition-all duration-300 flex items-center gap-2 text-sm"
+                    data-astro-reload
                 >
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
@@ -40,6 +43,7 @@ import '../css/tailwind.css';
             <a 
                 href="/Opyleo-Landing-Page" 
                 class="text-2xl font-bold transition-transform duration-300 hover:scale-110"
+                data-astro-reload
             >
                 opyleo
             </a>
@@ -88,7 +92,7 @@ import '../css/tailwind.css';
                     <p>W naszej aplikacji wyświetlane są reklamy dostarczane przez Admob.</p>
                     <p>
                         Więcej informacji w 
-                        <a href="https://policies.google.com/privacy" target="_blank" class="text-highlight-1 hover:text-highlight-2 transition-colors">
+                        <a href="https://policies.google.com/privacy" target="_blank" class="text-highlight-1 hover:text-highlight-2 transition-colors" data-astro-reload>
                             Polityce Prywatności Google
                         </a>
                     </p>
@@ -97,7 +101,7 @@ import '../css/tailwind.css';
                 <h2 class="text-2xl font-bold text-highlight-3 mb-4">4. Reklamacje</h2>
                 <div class="space-y-3 text-gray-600">
                     <p>Reklamacje należy zgłaszać poprzez kontakt z obsługą klienta pod adresem email: 
-                        <a href="mailto:opyleoproject@gmail.com" class="text-highlight-1 hover:text-highlight-2 transition-colors">
+                        <a href="mailto:opyleoproject@gmail.com" class="text-highlight-1 hover:text-highlight-2 transition-colors" data-astro-reload>
                             opyleoproject@gmail.com
                         </a>
                     </p>
