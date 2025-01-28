@@ -7,6 +7,7 @@ import Swiper from '../components/swiperComponent.astro'
 import MobileAppPopup from '../components/popup.astro';
 import GoogleAnalyticsHead from '../components/googleAnalyticsHead.astro';
 import { ClientRouter } from 'astro:transitions';
+const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
 ---
 
 
@@ -118,10 +119,10 @@ import { ClientRouter } from 'astro:transitions';
             <!-- Footer links with fixed height -->
             <div class="w-full p-4 flex justify-end">
                 <div class="flex gap-4 text-sm">
-                    <a href="/Opyleo-Landing-Page/polityka-prywatnosci" class="text-white hover:text-highlight-1 transition-colors">
+                    <a href={`${basePrefix}polityka-prywatnosci`} class="text-white hover:text-highlight-1 transition-colors">
                         Polityka prywatności
                     </a>
-                    <a href="/Opyleo-Landing-Page/regulamin" class="text-white hover:text-highlight-1 transition-colors">
+                    <a href={`${basePrefix}regulamin`} class="text-white hover:text-highlight-1 transition-colors">
                         Regulamin
                     </a>
                 </div>
@@ -310,9 +311,9 @@ import { ClientRouter } from 'astro:transitions';
         <footer class="flex justify-evenly h-[15lvh] bg-background-3 text-white items-center">
             <div style="border-right: #777 solid 1px; color: #BBB" class="w-2/5 text-center"><b>Opyleo 2025</b></div>
             <div class="footer-font w-3/5 text-center text-sm min-[360px]:!text-base">
-                <a href="Opyleo-Landing-Page/polityka-prywatnosci">Polityka prywatności</a>
+                <a href={`${basePrefix}polityka-prywatnosci`}>Polityka prywatności</a>
                 <br/>
-                <a href="Opyleo-Landing-Page/regulamin">Regulamin</a>
+                <a href={`${basePrefix}regulamin`}>Regulamin</a>
             </div>
         </footer>
         <script src="../js/correctHeights.ts"></script>
