@@ -33,6 +33,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Check installed versions
+        run: |
+          echo "Node version: $(node -v)"
+          echo "Astro version: $(pnpm list astro)"
+
       - name: Build TypeScript files
         run: pnpm build:ts
 
