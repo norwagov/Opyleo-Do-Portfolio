@@ -10,5 +10,6 @@ export default defineConfig({
     ssr: {
       noExternal: ['swiper', 'swiper/*']
     }
-  }
+  },
+  router: 'client',
 });
