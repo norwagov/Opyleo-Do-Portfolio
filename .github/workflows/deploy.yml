@@ -16,14 +16,27 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.1' # LTS version
+          
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9.13.2
-        
+
+      - name: Clear pnpm cache
+        run: pnpm cache clean
+
       - name: Install dependencies
         run: pnpm install
+
+      - name: Check installed versions
+        run: |
+          echo "Node version: $(node -v)"
+          echo "Astro version: $(pnpm list astro)"
 
       - name: Set up environment variables
         run: |
@@ -32,7 +45,7 @@ jobs:
 
       - name: Build TypeScript files
         run: pnpm build:ts
-
+        
       - name: Build and upload site
         uses: withastro/action@v3
         with:
