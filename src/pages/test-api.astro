@@ -1,16 +1,77 @@
 ---
 import CardTemplate from '../components/cardTemplate.astro'
-import { getBooks } from '../js/api.ts';
+// import { getBooks } from '../js/api.ts';
 
-const books = await getBooks();
-const state = ["Zły", "Umiarowany", "Dobry", "Bardzo dobry"];
+// const books = await getBooks();
+
+
+const title = "card_title";
+const price = "card_price";
+const state = "card_state";
+const seller = "card_seller";
+const imageUrl = "card_image_url";
+
+const api_url = import.meta.env.API_URL;
+
+
 ---
 <head>
     <meta charset="utf-8" />
     <title>Test API</title>
+    <script>
+      const state2 = ["Zły", "Umiarowany", "Dobry", "Bardzo dobry"];
+      document.addEventListener("DOMContentLoaded", () => {
+        //console.log("${api_url}");
+        fetch("http://localhost:5000/read") //to do
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.text();
+        })
+  .then(text => {
+    const jsonStart = text.indexOf("{");
+    if (jsonStart === -1) {
+      throw new Error("Nie znaleziono JSON-a w odpowiedzi!");
+    }
+
+    const jsonString = text.slice(jsonStart);
+    try {
+      const data = JSON.parse(jsonString)["results"];
+      console.log("Dane z API:", data);
+      const booksDiv = document.getElementById("books");
+      const cardHtml = document.getElementById("card")?.innerHTML;
+      console.log(cardHtml?.replace('"/src/assets/default-image.jpg"', '"aaa"'));
+
+      if (booksDiv) {
+          for (const id in data) {
+            console.log("test");
+              booksDiv.innerHTML += cardHtml?.replace(">card_title<", ">" + data[id]["title"] + "<") 
+              .replace(">card_price<", ">" + data[id]["price"] + " zł<")
+              .replace(">card_state<", ">" + state2[data[id]["condition"] - 1] + "<")
+              .replace(">card_seller<", ">" + data[id]["creator_name"] + "<")
+              .replace('src="card_image_url"', 'src="' + data[id]["first_image"] + '"');
+          }
+      } else {
+          console.error("Element #books nie istnieje w DOM!");
+      }
+    } catch (error) {
+      throw new Error("Nie udało się sparsować odpowiedzi jako JSON!");
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error.message);
+  });
+});
+
+      </script>
 </head>
 
-{books.map((book) => (
+<div id="books">
+
+</div>
+
+<!-- {books.map((book) => (
     <CardTemplate
         title = {book.title}
         price = {`${book.price} zł`}
@@ -18,4 +79,14 @@ const state = ["Zły", "Umiarowany", "Dobry", "Bardzo dobry"];
         seller = {book.creator_name}
         imageUrl = {book.first_image}
     />
-    ))}
+    ))} -->
+
+<div id="card" style="display:none;">
+  <CardTemplate 
+    title={title}
+    price={price}
+    state={state}
+    seller={seller}
+    imageUrl={imageUrl}
+  />
+</div>

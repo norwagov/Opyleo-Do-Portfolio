@@ -49,7 +49,7 @@ const {
     }
 
     /* Small devices (iPhone SE and similar) */
-    @media (max-height: 599px) {
+    /* @media (max-height: 599px) {
         .aspect-responsive {
             aspect-ratio: 5/7;
         }
@@ -68,16 +68,29 @@ const {
         .title-responsive {
             @apply text-sm;
         }
-    }
+    } */
 </style>
-<div class="w-full max-w-18 bg-white rounded-xl transition-shadow aspect-responsive">
+<!-- <div class="w-full max-w-18 bg-white rounded-xl transition-shadow aspect-responsive">
     <div class="relative w-full h-2/3"> {/* Maintain proportional height */}
         <div class="w-full h-full rounded-t-xl overflow-hidden">
             <img draggable="false"
                 class="w-full h-full object-cover"
                 src={imageUrl}
                 alt={title}
-                onerror=`this.onerror=null; this.src='${defaultImagePath}';`>
+                onerror=`this.onerror=null; this.src='${defaultImagePath}';`> -->
+<div class="w-[280px] bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
+    <!-- Image Container -->
+    <div class="relative">
+        <!-- Main Image Area -->
+        <div class="h-[360px] rounded-t-xl overflow-hidden">
+            <!-- Book cover/content area -->
+            <div class="w-full h-full relative">
+                <img draggable="false"
+                    class="w-full h-full object-cover"
+                    src={imageUrl}
+                    alt={title}>
+                    <!-- onerror=`this.onerror=null; this.src='${defaultImagePath}';` -->
+            </div>
         </div>
         <!-- Camera Icon Button -->
         <button class="absolute top-3 right-3 bg-black/40 hover:bg-black/60 rounded-full p-2.5 transition-colors">
