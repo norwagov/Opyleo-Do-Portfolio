@@ -23,20 +23,27 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
         <!-- Preload critical images -->
-        <link
+        <link 
             rel="preload"
-            href="/Opyleo-Landing-Page/man-book.png"
+            href={`${basePrefix}woman-reading-night.png`}
             as="image"
+            fetchpriority="high"
+            type="image/png"
         >
-        <link
+        <link 
             rel="preload"
-            href="/Opyleo-Landing-Page/woman-reading-night.png"
+            href={`${basePrefix}man-book.png`}
             as="image"
+            fetchpriority="high"
+            type="image/png"
         >
+        <!-- Lower priority for less critical images -->
         <link
             rel="preload"
-            href="/Opyleo-Landing-Page/section-5.png"
+            href={`${basePrefix}section-5.png`}
             as="image"
+            fetchpriority="high"
+            type="image/png"
         >
         <title>Opyleo</title>
         <style>

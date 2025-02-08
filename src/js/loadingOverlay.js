@@ -1,5 +1,7 @@
 // loadingOverlay.js
 
+
+// Maybe include waiting for the images too
 document.addEventListener('DOMContentLoaded', () => {
     // Disable scrolling while loading
     document.body.style.overflow = 'hidden';
