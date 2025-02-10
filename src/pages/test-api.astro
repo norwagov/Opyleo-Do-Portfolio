@@ -1,28 +1,18 @@
 ---
 import CardTemplate from '../components/cardTemplate.astro'
-// import { getBooks } from '../js/api.ts';
-
-// const books = await getBooks();
-
-
-const title = "card_title";
-const price = "card_price";
-const state = "card_state";
-const seller = "card_seller";
-const imageUrl = "card_image_url";
 
 const api_url = import.meta.env.API_URL;
-
-
 ---
 <head>
     <meta charset="utf-8" />
     <title>Test API</title>
-    <script>
+    <script define:vars={{ api_url  }}>
       const state2 = ["Zły", "Umiarowany", "Dobry", "Bardzo dobry"];
       document.addEventListener("DOMContentLoaded", () => {
-        //console.log("${api_url}");
-        fetch("http://localhost:5000/read") //to do
+        const start = 1;
+        const end = 10;
+        const page = Math.floor(Math.random() * (end - start + 1) + start);
+        fetch(`${api_url}` + '?page=' + page.toString()) //to do
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -71,22 +61,12 @@ const api_url = import.meta.env.API_URL;
 
 </div>
 
-<!-- {books.map((book) => (
-    <CardTemplate
-        title = {book.title}
-        price = {`${book.price} zł`}
-        state = {state[book.condition - 1]}
-        seller = {book.creator_name}
-        imageUrl = {book.first_image}
-    />
-    ))} -->
-
 <div id="card" style="display:none;">
   <CardTemplate 
-    title={title}
-    price={price}
-    state={state}
-    seller={seller}
-    imageUrl={imageUrl}
+    title="card_title"
+    price="card_price"
+    state="card_state"
+    seller="card_seller"
+    imageUrl="card_image_url"
   />
 </div>
