@@ -42,9 +42,8 @@ const api_url = import.meta.env.API_URL;
     
 
     <script type="module" define:vars={{ api_url, basePrefix }}>
-      // @vite-ignore
-      import Swiper from './../node_modules/swiper';
-      import { Autoplay } from './../node_modules/swiper/modules';
+      import Swiper from 'swiper';
+      import { Autoplay } from 'swiper/modules';
       
       // Add text truncation functions
       function measureTextWidth(text, font) {
