@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default aspect ratio */
+.aspect-responsive {
+    aspect-ratio: 7/12;
+}
+
+/* Large devices (tablets and larger) */
+@media (min-height: 700px) {
+    .aspect-responsive {
+        aspect-ratio: 7/12;
+    }
+}
+
+/* Medium devices (larger phones) */
+@media (min-height: 600px) and (max-height: 699px) {
+    .aspect-responsive {
+        aspect-ratio: 2/3;
+    }
+    .price-responsive {
+        @apply text-base;
+    }
+    .title-responsive {
+        @apply text-sm;
+    }
+    .hide-on-medium {
+        display: none;
+    }
+}
+
+/* Small devices (iPhone SE and similar) */
+@media (max-height: 599px) {
+    .aspect-responsive {
+        aspect-ratio: 5/7;
+    }
+    .details-container {
+        @apply py-1;
+    }
+    .hide-on-small {
+        display: none;
+    }
+    .description-small {
+        @apply h-full justify-around;
+    }
+    .price-responsive {
+        @apply text-sm;
+    }
+    .title-responsive {
+        @apply text-sm;
+    }
+}

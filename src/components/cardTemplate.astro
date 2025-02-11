@@ -10,12 +10,14 @@ interface Props {
     imageUrl?: string;
 }
 
+const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
+
 const { 
     title = "Tytuł", 
     price = "Cena", 
     state = "Stan", 
     seller = "Imię Nazwisko",
-    defaultImagePath = "default-image.jpg",
+    defaultImagePath = `${basePrefix}default-image.jpg`,
     imageUrl = ""
 } = Astro.props;
 ---
@@ -140,7 +142,7 @@ function truncateToFit(
 ): string {
     const words = title.split(' ');
     const ellipsis = '...';
-    
+        
     if (allowTwoLines) {
         // Try to fit in two lines
         const firstLine: string[] = [];
