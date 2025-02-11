@@ -7,6 +7,8 @@ import CardTemplate from './cardTemplate.astro';
 import MobileAppPopup from '../components/popup.astro';
 import type Popup from './popup.astro';
 
+
+
 const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
 
 const api_url = import.meta.env.API_URL;
@@ -40,9 +42,10 @@ const api_url = import.meta.env.API_URL;
     
 
     <script type="module" define:vars={{ api_url, basePrefix }}>
-      import { Swiper } from '/node_modules/swiper';
-      import { Autoplay } from '/node_modules/swiper/modules';
-
+      // @vite-ignore
+      import Swiper from './../node_modules/swiper';
+      import { Autoplay } from './../node_modules/swiper/modules';
+      
       // Add text truncation functions
       function measureTextWidth(text, font) {
         const canvas = document.createElement('canvas');
