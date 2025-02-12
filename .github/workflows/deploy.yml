@@ -42,8 +42,8 @@ jobs:
 
       - name: Set up environment variables
         run: |
-          echo "API_URL=${{ secrets.API_URL }}" >> $GITHUB_ENV
-          echo "API_MAX_PAGE=${{ secrets.API_MAX_PAGE }}" >> $GITHUB_ENV
+          echo "PUBLIC_API_URL=${{ secrets.PUBLIC_API_URL }}" >> $GITHUB_ENV
+          echo "PUBLIC_API_MAX_PAGE=${{ secrets.PUBLIC_API_MAX_PAGE }}" >> $GITHUB_ENV
 
       - name: Build TypeScript files
         run: pnpm build:ts
