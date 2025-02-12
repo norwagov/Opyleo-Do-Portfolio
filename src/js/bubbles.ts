@@ -40,8 +40,6 @@ export class BubbleLayout {
         
         // Initialize dimensions
         const rect = this.container.getBoundingClientRect();
-        console.log("Width of the container: ", rect.width);
-        console.log("Height of the container: ", rect.height);
         this.width = rect.width;
         this.height = rect.height;
         this.centerX = this.width / 2;
@@ -56,7 +54,6 @@ export class BubbleLayout {
             this.responsivenessCoefficient = 0.9;
         }
         else this.responsivenessCoefficient = 1;
-        console.log("Responsiveness coefficient: ", this.responsivenessCoefficient);
 
         this.initialize();
         this.setupResizeListener();

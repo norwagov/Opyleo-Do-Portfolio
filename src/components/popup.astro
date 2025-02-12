@@ -175,9 +175,7 @@ const {
     }
 
     if (googlePlayLink) {
-        console.log('Google Play link found:', googlePlayLink);
         googlePlayLink.addEventListener('click', () => {
-            console.log('Google Play link clicked');
             gtag('event', 'GooglePlayClick', {  // Changed to match your original naming
                 'event_category': 'conversion',
                 'event_label': 'Google Play',
