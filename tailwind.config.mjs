@@ -50,6 +50,10 @@ export default {
 						opacity: 1
 					}
 				},
+				fadeInSlides: {
+					from: { opacity: '0.8' },
+					to: { opacity: '1' }
+				},
 				scrollBounce: {
 					'0%, 20%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(110vh)' },
@@ -67,6 +71,7 @@ export default {
 				'slide-in-bounce-text': 'slideInBounceText 1.2s cubic-bezier(0.25, 1.25, 0.5, 1.5)',
 				'slide-in-bounce-svg': 'slideInBounceSvg 1.2s cubic-bezier(0.25, 1.25, 0.5, 1.5)',
 				'fadeIn': 'fadeIn 1.2s linear',
+				'fadeInSlides': 'fadeInSlides 1.5s ease-in-out',
 				'scroll-bounce': 'scrollBounce 1.5s cubic-bezier(0.68, -0.6, 0.32, 1.6)',
 				'loading-bar': 'loadingBar 1.5s ease-in-out infinite'
 			},
@@ -86,7 +91,19 @@ export default {
 			},
 			boxShadow: {
 				'book': '0px 0px 60px -15px rgba(0, 0, 0, 0.5)',
-			},
+				},
+			utilities: {
+				'.scrollbar-hide': {
+					/* IE and Edge */
+					'-ms-overflow-style': 'none',
+					/* Firefox */
+					'scrollbar-width': 'none',
+					/* Safari and Chrome */
+					'&::-webkit-scrollbar': {
+						display: 'none'
+					}
+				}
+			}
 		},
 	},
 	plugins: [],

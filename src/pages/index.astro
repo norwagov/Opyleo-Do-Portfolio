@@ -47,6 +47,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
         >
         <title>Opyleo</title>
         <style>
+           
             /* Add loading styles */
             .image-loading {
                 position: relative;
@@ -113,21 +114,8 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             }
 
             .vertical-snap-slider {
-                height: 100svh;
-                overflow-y: scroll;
-                scroll-snap-type: y mandatory;
-                position: relative;
                 touch-action: pan-y;
                 -webkit-overflow-scrolling: touch;
-            }
-
-            .snap-section {
-                scroll-snap-align: start;
-                scroll-snap-stop: always;
-                height: 100svh;
-                width: 100%;
-                position: relative;
-                overflow: hidden;
             }
 
             /* Hide scrollbar for Chrome, Safari and Opera */
@@ -139,31 +127,6 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             .vertical-snap-slider {
                 -ms-overflow-scrolling: touch;
                 scrollbar-width: none;
-            }
-
-            /* Progress indicator */
-            .progress-indicator {
-                position: fixed;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 1000;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .progress-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.5);
-                transition: all 0.3s ease;
-            }
-
-            .progress-dot.active {
-                background: white;
-                transform: scale(1.5);
             }
         </style>
         <ClientRouter />
@@ -240,9 +203,9 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                 </div>
             </div>
         </div>
-        <div class="vertical-snap-slider">
+        <div class="vertical-snap-slider h-[100svh] overflow-y-scroll snap-y snap-mandatory relative">
             <!-- Section 1 -->
-            <section class="snap-section" data-section="1">
+            <section class="snap-section !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="1">
                 <section 
                     style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);" 
                     class="h-[100svh]">
@@ -276,7 +239,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 2 -->
-            <section class="snap-section" data-section="2">
+            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="2">
                 <section
                     style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
                     class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
@@ -328,7 +291,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 3 -->
-            <section class="snap-section" data-section="3">
+            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="3">
                 <section
                     style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);"
                     class="relative z-0 h-screen flex flex-col items-center font-bold">
@@ -342,7 +305,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 4 -->
-            <section class="snap-section" data-section="4">
+            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="4">
                 <section
                     style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
                     class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
@@ -390,7 +353,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 5 (Last section) - Update this section -->
-            <section class="snap-section" data-section="5">
+            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="5">
                 <section class="relative h-[100lvh] w-full flex flex-col items-center font-bold">
                     <!-- Your existing section 5 content -->
                     <div class="absolute top-0 w-full h-full z-10">
@@ -441,12 +404,12 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
         </div>
 
         <!-- Progress indicator -->
-        <div class="progress-indicator">
-            <div class="progress-dot active" data-section="1"></div>
-            <div class="progress-dot" data-section="2"></div>
-            <div class="progress-dot" data-section="3"></div>
-            <div class="progress-dot" data-section="4"></div>
-            <div class="progress-dot" data-section="5"></div>
+        <div class="flex min-[460px]:!hidden fixed right-[10px] top-1/2 translate-y-[-50%] gap-[8px] z-[1000] flex-col">
+            <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="1"></div>
+            <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="2"></div>
+            <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="3"></div>
+            <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="4"></div>
+            <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="5"></div>
         </div>
 
         <script src="../js/correctHeights.ts"></script>
