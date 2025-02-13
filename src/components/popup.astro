@@ -93,11 +93,12 @@ const {
   </div>
 </div>
 
-
-
-
-
 <script define:vars={{ triggerSelector, simulateDevice }}>
+  // Function to block touchmove overscroll
+  function preventTouchMove(e) {
+    e.preventDefault();
+  }
+
   function detectMobileDevice() {
     // If simulation is enabled, use that instead of real detection
     if (simulateDevice) {
@@ -134,6 +135,8 @@ const {
   }
 
   function setupEventListeners() {
+    const parentContainer = document.querySelector(triggerSelector)?.parentElement;
+    console.log(parentContainer);
     const popup = document.getElementById('mobile-app-popup');
     const popupContent = document.getElementById('popup-content');
     const closeButton = document.getElementById('close-popup');
@@ -145,75 +148,110 @@ const {
     if (!popup || !closeButton || !popupContent || triggerElements.length === 0) return;
 
     function openPopup() {
-        body = document.querySelector('body');
-        body.classList.add('overflow-y-hidden');
-        popup.classList.remove('hidden');
-        void popup.offsetWidth;
-        popup.classList.add('flex');
-        popup.classList.remove('bg-black/0');
-        popup.classList.add('bg-black/50');
-        popup.classList.add('backdrop-blur-sm');
-        popupContent.classList.remove('scale-90');
-        popupContent.classList.remove('opacity-0');
+      body = document.querySelector('body');
+      body.classList.add('overflow-y-hidden');
+      
+      // Disable sliding by turning off vertical scroll on the slider
+      const slider = document.querySelector('.vertical-snap-slider');
+      if (slider) {
+        slider.style.overflowY = 'hidden';
+        slider.style.overscrollBehavior = 'contain';
+      }
 
-        // Track popup open after it's actually opened
-        gtag('event', 'Opened Popup', {
-            'event_category': 'engagement',
-            'event_label': triggerSelector
-        });
-    }
+      document.documentElement.style.overscrollBehavior = 'none';
+      document.body.style.overscrollBehavior = 'none';
 
-    // Track app store clicks
-    if (appStoreLink) {
-        appStoreLink.addEventListener('click', () => {
-            gtag('event', 'AppStoreClick', {
-                'event_category': 'conversion',
-                'event_label': 'App Store',
-                'outbound': true
-            });
-        });
-    }
+      // Additionally, block touchmove events globally (prevents any swipe/overscroll)
+      window.addEventListener('touchmove', preventTouchMove, { passive: false });
+      
+      // Fade out progress indicator (assumes an element with id "progress-indicator")
+      const progressIndicator = document.getElementById('progress-indicator');
+      if (progressIndicator) {
+        progressIndicator.classList.add('opacity-0');
+      }
+      
+      popup.classList.remove('hidden');
+      void popup.offsetWidth;
+      popup.classList.add('flex');
+      popup.classList.remove('bg-black/0');
+      popup.classList.add('bg-black/50');
+      popup.classList.add('backdrop-blur-sm');
+      popupContent.classList.remove('scale-90');
+      popupContent.classList.remove('opacity-0');
 
-    if (googlePlayLink) {
-        googlePlayLink.addEventListener('click', () => {
-            gtag('event', 'GooglePlayClick', {  // Changed to match your original naming
-                'event_category': 'conversion',
-                'event_label': 'Google Play',
-                'outbound': true
-            });
-            // Add small delay to ensure event fires
-            setTimeout(() => {
-                window.open(googlePlayLink.href, '_blank');
-            }, 100);
-        });
-    } else {
-        console.error('Google Play link not found');
+      // Track popup open event
+      gtag('event', 'Opened Popup', {
+        'event_category': 'engagement',
+        'event_label': triggerSelector
+      });
     }
 
     function closePopup() {
       body = document.querySelector('body');
       body.classList.remove('overflow-y-hidden');
+
+      // Re-enable vertical scroll on the slider
+      document.documentElement.style.overscrollBehavior = '';
+      document.body.style.overscrollBehavior = '';
+
+      const slider = document.querySelector('.vertical-snap-slider');
+      if (slider) {
+        slider.style.overflowY = '';
+        slider.style.overscrollBehavior = '';
+      }
+
+      // Remove the global touchmove blocker
+      window.removeEventListener('touchmove', preventTouchMove);
+      
+      // Restore progress indicator visibility
+      const progressIndicator = document.getElementById('progress-indicator');
+      if (progressIndicator) {
+        progressIndicator.classList.remove('opacity-0');
+      }
+      
       popup.classList.add('bg-black/0');
       popup.classList.remove('bg-black/50');
       popup.classList.remove('backdrop-blur-sm');
       popupContent.classList.add('scale-90');
       popupContent.classList.add('opacity-0');
-      
+
       setTimeout(() => {
         popup.classList.remove('flex');
         popup.classList.add('hidden');
       }, 300);
     }
 
-    // Add click event to all trigger elements
+    // Track app store and Google Play clicks (unchanged)
+    if (appStoreLink) {
+      appStoreLink.addEventListener('click', () => {
+        gtag('event', 'AppStoreClick', {
+          'event_category': 'conversion',
+          'event_label': 'App Store',
+          'outbound': true
+        });
+      });
+    }
+
+    if (googlePlayLink) {
+      googlePlayLink.addEventListener('click', () => {
+        gtag('event', 'GooglePlayClick', {
+          'event_category': 'conversion',
+          'event_label': 'Google Play',
+          'outbound': true
+        });
+        setTimeout(() => {
+          window.open(googlePlayLink.href, '_blank');
+        }, 100);
+      });
+    }
+
+    // Attach click events to popup trigger elements
     triggerElements.forEach(trigger => {
       trigger.addEventListener('click', openPopup);
     });
 
-    // Close button event
+    // Close popup on close button and outside clicks
     closeButton.addEventListener('click', closePopup);
-
-    // Outside click event
     popup.addEventListener('click', (event) => {
       if (event.target === popup) {
         closePopup();

@@ -41,25 +41,28 @@ export class BubbleLayout {
         if (!containerElement) throw new Error('Container element not found');
         this.container = containerElement;
         
-        // Initialize dimensions
+        // Initialize dimensions & center
         const rect = this.container.getBoundingClientRect();
         this.width = rect.width;
         this.height = rect.height;
         this.centerX = this.width / 2;
         this.centerY = this.height / 2;
         
-        // Define the responsiveness coefficient
+        // Set your responsiveness values
         if (this.height < 350) { 
             this.responsivenessCoefficient = 0.6;
         } else if (this.height < 500) {
             this.responsivenessCoefficient = 0.8;
         } else if (this.height < 600) {
             this.responsivenessCoefficient = 0.9;
+        } else {
+            this.responsivenessCoefficient = 1;
         }
-        else this.responsivenessCoefficient = 1;
 
         this.initialize();
         this.setupResizeListener();
+        this.setupPointerEvents();
+        this.setupIntersectionObserver(); // New observer for immediate appearance
     }
 
     private initialize(): void {
@@ -128,18 +131,9 @@ export class BubbleLayout {
         if (!this.draggedNode) return;
 
         const touch = e.touches[0];
+        // Allow bubbles to move freely, just updating the position without constraining:
         this.draggedNode.x = touch.clientX - this.draggedNode.dragStartX;
         this.draggedNode.y = touch.clientY - this.draggedNode.dragStartY;
-
-        // Keep bubble within bounds
-        this.draggedNode.x = Math.max(
-            this.draggedNode.radius,
-            Math.min(this.width - this.draggedNode.radius, this.draggedNode.x)
-        );
-        this.draggedNode.y = Math.max(
-            this.draggedNode.radius,
-            Math.min(this.height - this.draggedNode.radius, this.draggedNode.y)
-        );
     }
 
     private handleTouchEnd() {
@@ -188,11 +182,14 @@ export class BubbleLayout {
       
           // If the bubble is near the container's edge, pop & respawn it
           const popMargin = 10;
+          const bubbleRect = node.element.getBoundingClientRect();
           if (
             !node.popped &&
             (
-              (node.x + node.radius < popMargin) ||
-              (node.x - node.radius > this.width - popMargin)
+              (bubbleRect.right < popMargin) ||
+              (bubbleRect.left > window.innerWidth - popMargin) ||
+              (bubbleRect.bottom < popMargin) ||
+              (bubbleRect.top > window.innerHeight - popMargin)
             )
           ) {
             this.popAndRespawnBubble(node);
@@ -347,6 +344,26 @@ export class BubbleLayout {
         node.element.style.opacity = '1';
         
         node.popped = false;
+    }
+
+    private setupIntersectionObserver(): void {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // As soon as 10% is visible, add a class or trigger your animations
+                    this.container.classList.add('active');
+                    // Ensure animations are running
+                    if (!this.isRunning) {
+                        this.isRunning = true;
+                        this.animate();
+                    }
+                } else {
+                    // Optionally, pause or remove animations when not visible
+                    this.container.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.1 }); // 10% of the container in view is enough
+        observer.observe(this.container);
     }
 
     public destroy(): void {

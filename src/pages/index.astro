@@ -387,7 +387,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                         <div style="border-right: #777 solid 1px; color: #BBB" class="w-2/5 text-center">
                             <b>Opyleo 2025</b>
                         </div>
-                        <div class="footer-font w-3/5 text-center text-sm min-[360px]:!text-base">
+                        <div class="footer-font w-3/5 text-center text-sm min-[360px]:!text-base z-20">
                             <a href={`${basePrefix}polityka-prywatnosci`}>Polityka prywatności</a>
                             <br/>
                             <a href={`${basePrefix}regulamin`}>Regulamin</a>
@@ -398,7 +398,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
         </div>
 
         <!-- Progress indicator -->
-        <div class="flex min-[460px]:!hidden fixed right-[10px] top-1/2 translate-y-[-50%] gap-[8px] z-[1000] flex-col">
+        <div id="progress-indicator"  class="flex min-[460px]:!hidden fixed right-[10px] top-1/2 translate-y-[-50%] gap-[8px] z-[1000] flex-col transform-opacity duration-300">
             <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="1"></div>
             <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="2"></div>
             <div class="progress-dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300 ease-in-out group-active:bg-white group-active:scale-150" data-section="3"></div>
