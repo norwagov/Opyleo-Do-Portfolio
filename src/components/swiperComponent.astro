@@ -62,47 +62,78 @@ import type Popup from './popup.astro';
     font: string, 
     allowTwoLines: boolean = false
   ): string {
-    const words: string[] = title.split(' ');
+    const cleanTitle = title.trim().replace(/\s+/g, ' ');
+    const words: string[] = cleanTitle.split(' ').filter(word => word.length > 0);
     const ellipsis: string = '...';
-        
+  
+    
+    // Early return if text fits completely
+    if (measureTextWidth(title, font) <= maxWidth) {
+      return title;
+    }
+
     if (allowTwoLines) {
-      const firstLine: string[] = [];
-      const secondLine: string[] = [];
-      let firstLineWidth: number = 0;
-      let secondLineWidth: number = 0;
-      
-      for (const word of words) {
-        const wordWidth: number = measureTextWidth(word + ' ', font);
-        
-        if (firstLineWidth + wordWidth <= maxWidth) {
-          firstLine.push(word);
-          firstLineWidth += wordWidth;
-        } else if (secondLineWidth + wordWidth <= maxWidth) {
-          secondLine.push(word);
-          secondLineWidth += wordWidth;
+      let firstLine: string[] = [];
+      let secondLine: string[] = [];
+      let currentFirstLine = '';
+      let currentSecondLine = '';
+
+      // Process first line
+      for (let i = 0; i < words.length; i++) {
+        const testLine = currentFirstLine + (currentFirstLine ? ' ' : '') + words[i];
+        if (measureTextWidth(testLine, font) <= maxWidth) {
+          currentFirstLine = testLine;
+          firstLine.push(words[i]);
         } else {
-          if (secondLine.length > 0) {
-            secondLine.pop();
+          // Start second line
+          const remainingWords = words.slice(i);
+          currentSecondLine = remainingWords.join(' ');
+          
+          // If second line fits completely
+          if (measureTextWidth(currentSecondLine, font) <= maxWidth) {
+            secondLine = remainingWords;
+            break;
+          }
+          
+          // Truncate second line
+          for (let j = 0; j < remainingWords.length; j++) {
+            const testSecondLine = remainingWords.slice(0, j + 1).join(' ');
+            const withEllipsis = testSecondLine + ellipsis;
+            
+            if (measureTextWidth(withEllipsis, font) > maxWidth) {
+              secondLine = remainingWords.slice(0, j);
+              break;
+            }
           }
           break;
         }
       }
-      
+
       if (secondLine.length > 0) {
-        return `${firstLine.join(' ')}\n${secondLine.join(' ')}${ellipsis}`;
+        const needsEllipsis = words.length > (firstLine.length + secondLine.length);
+        return `${firstLine.join(' ')}\n${secondLine.join(' ')}${needsEllipsis ? ellipsis : ''}`;
       }
     }
+
+    // Single line truncation - more precise approach
+    let result = '';
+    let currentLine = '';
     
-    let currentText: string = words.join(' ') + ellipsis;
-    let currentWidth: number = measureTextWidth(currentText, font);
-    
-    while (words.length > 0 && currentWidth > maxWidth) {
-      words.pop();
-      currentText = words.join(' ') + ellipsis;
-      currentWidth = measureTextWidth(currentText, font);
+    for (let i = 0; i < words.length; i++) {
+      const testLine = currentLine + (currentLine ? ' ' : '') + words[i];
+      const withEllipsis = testLine + ellipsis;
+      console.log(testLine);
+      if (measureTextWidth(withEllipsis, font) <= maxWidth) {
+        currentLine = testLine;
+        result = testLine;
+      } else {
+        break;
+      }
     }
-    
-    return words.join(' ') + ellipsis;
+
+    // Only add ellipsis if we actually truncated the text
+    const needsEllipsis = result.length < title.length;
+    return result + (needsEllipsis ? ellipsis : '');
   }
 
   function initializeTitleTruncation(): void {
@@ -110,7 +141,15 @@ import type Popup from './popup.astro';
     
     titleElements.forEach(element => {
       const titleEl: HTMLElement = element;
-      const originalText: string = titleEl.getAttribute('data-original-title') || titleEl.textContent || '';
+      // Clean up the original text
+      const originalText: string = (
+        titleEl.getAttribute('data-original-title') || 
+        titleEl.textContent || ''
+      ).trim().replace(/\s+/g, ' ');
+      
+      // Store clean original text
+      titleEl.setAttribute('data-original-title', originalText);
+      
       const computedStyle: CSSStyleDeclaration = window.getComputedStyle(titleEl);
       const availableWidth: number = titleEl.clientWidth;
       const font: string = `${computedStyle.fontWeight} ${computedStyle.fontSize} ${computedStyle.fontFamily}`;
@@ -118,7 +157,7 @@ import type Popup from './popup.astro';
       const allowTwoLines: boolean = window.innerHeight < 600;
       
       const truncatedText: string = truncateToFit(originalText, availableWidth, font, allowTwoLines);
-      titleEl.textContent = truncatedText;
+      titleEl.textContent = truncatedText; // This will be clean by default since we cleaned the input
       
       if (allowTwoLines) {
         titleEl.style.whiteSpace = 'pre-line';
@@ -159,7 +198,7 @@ import type Popup from './popup.astro';
           const slideElement: HTMLDivElement = document.createElement('div');
           slideElement.className = 'swiper-slide !flex items-center';
           slideElement.innerHTML = `
-            <div class="w-full max-w-18 bg-white rounded-xl transition-shadow aspect-responsive" data-truncated="false" data-original-title="${book.title}">
+            <div class="w-full max-w-18 bg-white rounded-xl transition-shadow aspect-responsive" data-truncated="false" data-original-title="${book.title.trim().replace(/\s+/g, ' ')}}">
               <div class="relative w-full h-2/3">
                 <div class="w-full h-full rounded-t-xl overflow-hidden">
                   <img draggable="false"
