@@ -82,15 +82,22 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
 
             section {
                 scroll-snap-align: start;
-                scroll-snap-stop: normal; /* Changed from always to normal for smoother transitions */
+                scroll-snap-stop: normal;
                 min-height: 100svh;
                 position: relative;
-                /* Add transform properties for smoother rendering */
                 transform: translateZ(0);
                 -webkit-transform: translateZ(0);
                 backface-visibility: hidden;
                 -webkit-backface-visibility: hidden;
             }
+
+            .section-transition {
+                @apply transition-opacity duration-500;
+                will-change: opacity;
+                transform: translateZ(0);
+                backface-visibility: hidden;
+            }
+
 
             /* Add smooth transition for section content */
             section > * {
@@ -205,7 +212,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
         </div>
         <div class="vertical-snap-slider h-[100svh] overflow-y-scroll snap-y snap-mandatory relative">
             <!-- Section 1 -->
-            <section class="snap-section !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="1">
+            <section class="snap-section section-transition !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="1">
                 <section 
                     style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);" 
                     class="h-[100svh]">
@@ -239,7 +246,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 2 -->
-            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="2">
+            <section class="snap-section section-transition !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="2">
                 <section
                     style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
                     class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
@@ -291,7 +298,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 3 -->
-            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="3">
+            <section class="snap-section section-transition !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="3">
                 <section
                     style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);"
                     class="relative z-0 h-screen flex flex-col items-center font-bold">
@@ -305,7 +312,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 4 -->
-            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="4">
+            <section class="snap-section section-transition !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="4">
                 <section
                     style="background: linear-gradient(-110deg, #FFFFFF 0%, #D76F9F 100%);"
                     class="relative z-0 h-[100lvh] flex justify-center items-center font-bold">
@@ -353,7 +360,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             </section>
 
             <!-- Section 5 (Last section) - Update this section -->
-            <section class="snap-section  !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="5">
+            <section class="snap-section section-transition !snap-start !snap-always h-[100svh] w-full relative overflow-hidden" data-section="5">
                 <section class="relative h-[100svh] w-full flex flex-col items-center font-bold">
                     <div class="absolute top-0 w-full h-full z-10">
                         <div
