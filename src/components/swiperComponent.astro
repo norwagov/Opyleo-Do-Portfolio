@@ -122,7 +122,7 @@ import type Popup from './popup.astro';
     for (let i = 0; i < words.length; i++) {
       const testLine = currentLine + (currentLine ? ' ' : '') + words[i];
       const withEllipsis = testLine + ellipsis;
-      console.log(testLine);
+      // console.log(testLine);
       if (measureTextWidth(withEllipsis, font) <= maxWidth) {
         currentLine = testLine;
         result = testLine;
@@ -250,7 +250,7 @@ import type Popup from './popup.astro';
         setTimeout(initializeTitleTruncation, 100);
       }
     } catch (error) {
-      console.error("Error loading books: ", error);
+      // console.error("Error loading books: ", error);
     }
   };
 

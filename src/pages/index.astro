@@ -229,9 +229,9 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                         <div class="grow max-h-[30%] flex items-center justify-center">
                             <div class="scroll-wrapper"> <!-- Consolidate css later -->
                                 <div class="scroll-animate-heading text-2xl min-[360px]:text-3xl">
-                                    <span>Witaj w <b class="font-black">Opyleo</b></span>
-                                    <span><b class="font-black">5 tysięcy</b> użytkowników</span>
-                                    <span>Ponad <b class="font-black">10 tysięcy</b> pobrań</span>
+                                    <span>Witaj w <b class="font-black">Opyleo!</b></span>
+                                    <span><b>Sprzedawaj i kupuj</b> książki</span>
+                                    <span>Łatwo i <b>bezpłatnie!</b></span>
                                 </div>
                             </div>
                         </div>
@@ -282,13 +282,12 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                                 <div class="absolute bottom-0 right-0 h-[150vw] w-[150vw] bg-white/40 backdrop-blur-2xl translate-x-[40%] translate-y-[30%] rounded-full">
                                     <p class="text-right font-bold text-xl min-[360px]:!text-2xl translate-x-[-42%] translate-y-[150%]">
                                         Opyleo,<br>
-                                        ekologiczniej się nie da!<br>
+                                        lokalnie i ekologicznie!<br>
                                     </p>
                                     <div class="text-right text-xl min-[360px]:!text-2xl font-extralight translate-x-[-42%] translate-y-[80%]">
-                                        Lorem ipsum dolor sit amet,<br>
-                                        consectetur adipiscing elit.<br>
-                                        Aenean elementum<br>
-                                        lacus a purus eleifend convallis.
+                                        Sprzedawaj książki<br>osobom z twojego otoczenia<br>
+                                        i zarabiaj na starych książkach<br>
+                                        promując ideę second-hand’u! 
                                     </div>
                                 </div>
                             </div>
@@ -303,8 +302,8 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                     style="background: linear-gradient(110deg, #D76F9F 0%, #FFFFFF 100%);"
                     class="relative z-0 h-screen flex flex-col items-center font-bold">
                     <div class="relative m-4 min-[360px]:m-8">
-                        <p class="text-3xl min-[360px]:!text-4xl font-bold mb-2 min-[360px]:mb-4">Opyleo</p>
-                        <p class="text-lg min-[360px]:!text-xl font-normal">Odkryj nasze kategorie i sprawdź, która najbardziej Ci się podoba!</p>
+                        <p class="text-3xl min-[360px]:!text-4xl font-bold mb-2 min-[360px]:mb-4">Opyleo,</p>
+                        <p class="text-lg min-[360px]:!text-xl font-normal">Kategorii książek na naszej apce starczy dla każdego!</p>
                     </div>
                     <div id="bubbles-container" class="relative flex-grow w-full"></div>
                     <div class="h-[10%] w-full"></div>
@@ -347,10 +346,10 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                                         a resztę zostaw nam!<br>
                                     </p>
                                     <div class="text-left text-xl min-[360px]:!text-2xl font-extralight translate-x-[44%] translate-y-[80%]">
-                                        Lorem ipsum dolor sit amet,<br>
-                                        consectetur adipiscing elit.<br>
-                                        Aenean elementum<br>
-                                        lacus a purus eleifend convallis.
+                                        Zrób tylko zdjęcie,<br>
+                                        a my uzupełnimy tytuł,<br>
+                                        opis i szczegóły<br>
+                                        za Ciebie!
                                     </div>
                                 </div>
                             </div>
@@ -441,7 +440,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                 layout.destroy();
                 });
             } catch (error) {
-                console.error('Failed to initialize bubble layout:', error);
+                // console.error('Failed to initialize bubble layout:', error);
             }
             });
 
