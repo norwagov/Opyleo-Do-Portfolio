@@ -92,8 +92,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
             }
 
             .section-transition {
-                @apply transition-opacity duration-500;
-                will-change: opacity;
+                will-change: transform;
                 transform: translateZ(0);
                 backface-visibility: hidden;
             }
@@ -255,7 +254,8 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                         <div class="absolute inset-0">
                             <img
                                 style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"
-                                src="/Opyleo-Landing-Page/woman-reading-night.png"
+                                src=`${basePrefix}woman-reading-night.png`
+
                                 alt="Background Image"
                                 class="blur-3xl h-[100lvh] w-[100vw] object-cover object-center"
                                 loading="eager"
@@ -267,7 +267,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                         <div class="relative z-10">
                             <img
                                 style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"
-                                src="/Opyleo-Landing-Page/woman-reading-night.png"
+                                src=`${basePrefix}woman-reading-night.png`
                                 alt="Main Image"
                                 class="h-[100lvh] w-[100vw] object-cover object-center opacity-0 transition-opacity duration-300"
                                 onload="this.classList.remove('opacity-0')"
@@ -320,7 +320,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                         <div>
                             <img
                                 style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"
-                                src="/Opyleo-Landing-Page/man-book.png"
+                                src=`${basePrefix}man-book.png`
                                 alt="Image"
                                 class="blur-3xl h-[100lvh] w-[100vw] object-cover object-center"
                                 loading="eager"
@@ -330,7 +330,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                         <div class="z-10 absolute top-0 left-0">
                             <img
                                 style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"
-                                src="/Opyleo-Landing-Page/man-book.png"
+                                src=`${basePrefix}man-book.png`
                                 alt="Image"
                                 class="h-[100lvh] w-[100vw] object-cover object-center"
                                 loading="eager"
@@ -382,7 +382,7 @@ const basePrefix = import.meta.env.DEV ? 'Opyleo-Landing-Page/' : '';
                     </button>
                     <div class="relative h-[85%] w-full flex justify-center items-end">
                         <img
-                            src="/Opyleo-Landing-Page/section-5.png"
+                            src=`${basePrefix}section-5.png`
                             alt="Ebook Image"
                             class="h-[70%] w-auto object-cover z-0"
                             loading="eager"
